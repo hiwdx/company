@@ -13,6 +13,22 @@ const initial = new URL(location.href).searchParams;
 const currencyNames = {USD: '美元', TWD: '新台币'};
 let section = sections.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
 let cik = '', model = null, loadID = 0, searchID = 0;
+let currentIssuer = null, selectedTicker = null, researchInfo = null, reportList = [], lastAttempt = null;
+const sourceStatuses = {
+  network_disabled: 'SEC 网络访问未开启', authorization_blocked: 'SEC 拒绝访问，本轮已停止',
+  rate_limited: 'SEC 限流，本轮已停止', fetch_failed: 'SEC 请求失败',
+  wrong_mime: 'SEC 返回了不支持的格式', error_document: 'SEC 返回了错误页面',
+  no_periodic_filing_in_window: '时间窗内未找到定期报告',
+  source_validation_failed: 'SEC 目录资料未通过校验',
+  unsupported_filing_form: '该表单已找到，自动财务提取暂未支持',
+  partial_history_latest_unproven: '历史目录存在缺口，无法确认最新报告',
+  evidence_rejected: '原文或数据核验未通过', source_unavailable: 'SEC 来源暂不可用',
+};
+const factStatuses = {
+  no_candidate: '未找到适用的标准标签', missing_same_filing_companyfacts: '同份申报的结构化旁证缺失',
+  ambiguous_concept_or_period: '标签或期间不唯一', unsupported_original_number: '原文数字格式暂不支持',
+  conflicting_original_values: '原文候选数值冲突', companyfacts_mismatch: '原文与结构化旁证不一致',
+};
 
 function sourceLink(text, source, cikValue, accession) {
   const url = new URL(source.source_url || source.original_url || source.url);
@@ -34,7 +50,12 @@ function sourceLink(text, source, cikValue, accession) {
 
 function showSection(next, focus = false) {
   section = sections.includes(next) ? next : 'overview';
-  for (const name of sections) $(name).hidden = !model || name !== section;
+  for (const name of sections) {
+    const available = model || (name === 'announcements' && researchInfo?.announcements)
+      || (name === 'reporting' && currentIssuer);
+    $(name).hidden = !available || name !== section;
+  }
+  $('error').hidden = !lastAttempt || !['overview', 'financials'].includes(section);
   for (const button of document.querySelectorAll('[data-section]')) {
     if (button.dataset.section === section) button.setAttribute('aria-current', 'page');
     else button.removeAttribute('aria-current');
@@ -71,14 +92,21 @@ try { preference = localStorage.getItem('hiwd-company-theme'); } catch (_) {}
 setTheme(preference || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 $('theme').addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 
-async function request(path, params) {
+async function request(path, params, body = null) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 8000);
   try {
-    const response = await fetch(path + '?' + new URLSearchParams(params), {cache: 'no-store', signal: controller.signal});
-    const body = await response.json();
-    if (!response.ok) throw Error(body.status || 'fetch_failed');
-    return body;
+    const suffix = body ? '' : '?' + new URLSearchParams(params);
+    const settings = {cache: 'no-store', signal: controller.signal};
+    if (body) {
+      settings.method = 'POST';
+      settings.headers = {'Content-Type': 'application/json'};
+      settings.body = JSON.stringify(body);
+    }
+    const response = await fetch(path + suffix, settings);
+    const payload = await response.json();
+    if (!response.ok) throw Error(payload.status || 'fetch_failed');
+    return payload;
   } finally {
     clearTimeout(timeout);
   }
@@ -86,7 +114,9 @@ async function request(path, params) {
 
 function beginLoad() {
   model = null;
+  lastAttempt = null;
   $('error').hidden = true;
+  $('error-source').replaceChildren();
   $('loading').hidden = false;
   for (const name of sections) $(name).hidden = true;
   return ++loadID;
@@ -96,20 +126,47 @@ function displayError(error) {
   const messages = {
     evidence_validation_failed: '财报证据校验失败，数字已隐藏。',
     not_found: '本地快照里未找到这份报告。',
-    unsupported: '本原型暂未覆盖这个发行人。',
+    unsupported: '当前目录或财报格式暂未支持。',
+    report_not_verified: '报告已发现，财务数字尚未通过核验。',
+    ...sourceStatuses,
   };
-  $('error-description').textContent = messages[error.message] || '读取本地财报失败，请重试。';
-  $('snapshot-label').textContent = '财报不可用';
-  $('error').hidden = false;
+  lastAttempt = error;
+  $('error-description').textContent = messages[error.message] || '读取财报失败，请重试。';
+  $('snapshot-label').textContent = '财务数字待核验';
+  const target = reportList.find(report => report.accession === $('report').value);
+  if (target?.original_url) $('error-source').append(sourceLink('打开 SEC 官方原文', target, cik, target.accession));
+  showSection(section);
 }
 
-function selectIssuer(issuer, accession) {
+function displaySecurities(issuer) {
+  const security = issuer.securities.find(stock => stock.ticker === selectedTicker) || issuer.securities[0];
+  const format = stock => stock.ticker + ' · ' + stock.exchange + ' · ' + stock.type +
+    (stock.underlying_shares ? '（每份代表 ' + stock.underlying_shares + ' 股普通股）' : '');
+  $('company-intro').textContent = security ? format(security) : 'SEC 发行人';
+  const other = $('other-securities');
+  const extras = issuer.securities.filter(stock => stock !== security);
+  other.open = false;
+  other.hidden = !extras.length;
+  other.querySelector('summary').textContent = '其他挂牌证券（' + extras.length + '）';
+  other.querySelector('ul').replaceChildren(...extras.map(stock => el('li', '', format(stock))));
+}
+
+function selectIssuer(issuer, accession, official = false) {
   cik = issuer.cik;
+  currentIssuer = issuer;
+  selectedTicker = issuer.matched_tickers?.[0] || null;
+  researchInfo = null;
+  reportList = [];
   $('company-title').textContent = issuer.label;
-  $('company-meta').textContent = issuer.name;
-  $('company-intro').textContent = '正在读取已核验报告';
+  $('company-meta').textContent = '发行人 · CIK ' + cik;
+  displaySecurities(issuer);
   $('search-results').hidden = true;
-  loadReports(accession);
+  $('research-state').textContent = '';
+  $('research-action').hidden = !official;
+  $('report').replaceChildren(el('option', '', '正在查找报告'));
+  $('report').disabled = true;
+  if (official) startResearch(accession);
+  else loadReports(accession);
 }
 
 async function findCompanies(event) {
@@ -127,8 +184,13 @@ async function findCompanies(event) {
   try {
     const data = await request('/api/search', {q: query});
     if (lookupID !== searchID) return;
-    if (data.status === 'unsupported') {
-      $('search-status').textContent = '本原型暂未覆盖这个查询。支持 AAPL、MSFT、NVDA、TSM。';
+    $('directory-status').textContent = data.directory
+      ? ('SEC 目录 · ' + data.directory.date + (data.directory.cache === 'stale' ? ' · 缓存已过期' : ''))
+      : '当前只查询可用的本地审阅样本。';
+    if (!data.candidates.length) {
+      $('search-status').textContent = data.status === 'source_unavailable'
+        ? (sourceStatuses[data.reason] || 'SEC 目录暂不可用。')
+        : '当前可用的发行人目录未匹配此查询。';
       return;
     }
     $('search-status').textContent = '找到 ' + data.candidates.length + ' 个发行人。请选择一项。';
@@ -139,7 +201,7 @@ async function findCompanies(event) {
       button.addEventListener('click', () => {
         $('company-query').value = issuer.matched_tickers[0] || issuer.securities[0].ticker;
         $('search-status').textContent = '';
-        selectIssuer(issuer);
+        selectIssuer(issuer, null, data.scope === 'sec_directory');
         $('company-title').tabIndex = -1;
         $('company-title').focus({preventScroll: true});
       });
@@ -166,28 +228,95 @@ $('search-results').addEventListener('keydown', event => {
   }
 });
 
+function refreshReportOptions(reports, accession) {
+  reportList = reports;
+  const select = $('report');
+  select.replaceChildren(...reports.map(entry => {
+    const status = entry.status === 'discovered' ? ' · 待提取' : '';
+    const option = el('option', '', entry.form + ' · ' + entry.label + status);
+    option.value = entry.accession;
+    return option;
+  }));
+  if (!reports.length) select.append(el('option', '', '当前没有可选报告'));
+  select.disabled = !reports.length;
+  if (accession && reports.some(row => row.accession === accession)) select.value = accession;
+}
+
 async function loadReports(accession) {
   const id = beginLoad();
-  const report = $('report');
-  report.disabled = true;
-  report.replaceChildren(el('option', '', '正在读取报告'));
   try {
-    const [list, data] = await Promise.all([request('/api/reports', {cik}),
-      request('/api/reader', {cik, unit: $('unit').value, ...(accession ? {accession} : {})})]);
+    const list = await request('/api/reports', {cik});
     if (id !== loadID) return;
+    refreshReportOptions(list.reports, accession);
     if (!list.reports.length) throw Error('not_found');
-    report.replaceChildren(...list.reports.map(entry => {
-      const option = el('option', '', entry.form + ' · ' + entry.label + ' · ' + entry.report_end);
-      option.value = entry.accession;
-      return option;
-    }));
-    report.value = data.document.accession;
-    report.disabled = false;
+    const data = await request('/api/reader', {cik, unit: $('unit').value, ...(accession ? {accession} : {})});
+    if (id !== loadID) return;
+    $('report').value = data.document.accession;
     render(data);
   } catch (error) {
     if (id === loadID) displayError(error);
   } finally {
     if (id === loadID) $('loading').hidden = true;
+  }
+}
+
+function researchSummary(info) {
+  if (!info) return;
+  const freshness = info.freshness === 'stale' ? '缓存已过期' : 'SEC 目录';
+  const gap = info.history_window?.complete ? '' : ' · 历史窗部分可核验';
+  const fallback = info.index_refresh_status ? ' · ' + (sourceStatuses[info.index_refresh_status] || '更新失败') : '';
+  $('research-state').textContent = '来源截至 ' + info.source_cutoff + '（美东） · ' + freshness + gap + fallback;
+}
+
+async function waitForResearch(cikValue, accession, id) {
+  let result = await request('/api/research', {}, {cik: cikValue, ...(accession ? {accession} : {})});
+  for (let checks = 0; result.status === 'pending' && checks < 150 && id === loadID; checks++) {
+    await new Promise(resolve => setTimeout(resolve, 1200));
+    if (id === loadID) result = await request('/api/research', {cik: cikValue});
+  }
+  return result;
+}
+
+async function startResearch(accession) {
+  const id = beginLoad(), target = cik;
+  $('research-action').disabled = true;
+  $('research-state').textContent = '正在核对 SEC 申报目录和原文…';
+  try {
+    let result = await waitForResearch(target, accession, id);
+    if (id !== loadID) return;
+    if (result.status === 'failed' || !result.history) {
+      if (result.cached) {
+        researchInfo = result.cached;
+        const list = await request('/api/reports', {cik: target});
+        if (id !== loadID) return;
+        refreshReportOptions(list.reports, accession ?? researchInfo.latest_accession);
+        renderAnnouncements();
+      }
+      const explanation = result.status === 'busy' ? '已有研究任务在运行，请稍后重试。' :
+        (sourceStatuses[result.reason] || '暂时无法完成 SEC 核验。');
+      $('research-state').textContent = explanation;
+      throw Error(result.reason || 'source_unavailable');
+    }
+    researchInfo = result;
+    researchSummary(result);
+    const desired = accession || result.latest_accession;
+    const list = await request('/api/reports', {cik: target});
+    if (id !== loadID) return;
+    refreshReportOptions(list.reports, desired);
+    renderAnnouncements();
+    if (!desired || (desired === result.selected_accession && result.verification === 'evidence_rejected'))
+      throw Error(result.verification);
+    if (!result.fetched_accessions.includes(desired)) throw Error(result.verification === 'source_unavailable'
+      ? (result.diagnostic || result.verification) : result.verification);
+    const data = await request('/api/reader', {cik: target, accession: desired, unit: $('unit').value});
+    if (id === loadID) render(data);
+  } catch (error) {
+    if (id === loadID) displayError(error);
+  } finally {
+    if (id === loadID) {
+      $('loading').hidden = true;
+      $('research-action').disabled = false;
+    }
   }
 }
 
@@ -198,24 +327,28 @@ function appendNarrative(target, kind, label, evidence, link) {
 }
 
 function render(data) {
-  if (data.dataset_kind !== 'real_official_reviewed_snapshot') throw Error('evidence_validation_failed');
+  if (!['real_official_reviewed_snapshot', 'real_official_auto_verified'].includes(data.dataset_kind))
+    throw Error('evidence_validation_failed');
   const {document: doc, issuer} = data;
   const link = (label, source) => sourceLink(label, source, issuer.cik, doc.accession);
-  const securities = issuer.securities.map(stock => stock.ticker + ' · ' + stock.exchange + ' · ' + stock.type +
-    (stock.underlying_shares ? '（每份代表 ' + stock.underlying_shares + ' 股普通股）' : ''));
   $('company-title').textContent = issuer.label;
-  $('company-meta').textContent = issuer.name;
-  $('company-intro').textContent = securities.join(' / ');
+  $('company-meta').textContent = '发行人 · CIK ' + issuer.cik;
+  displaySecurities(issuer);
   $('summary-period').textContent = doc.form + ' · ' + doc.report_end;
-  const mode = data.acquisition_mode === 'manual_import' ? '人工导入原文' : 'SEC 官方快照';
+  const mode = data.acquisition_mode === 'sec_on_demand' ? 'SEC 按需核验' :
+    data.acquisition_mode === 'manual_import' ? '人工导入原文' : 'SEC 官方快照';
   $('snapshot-label').textContent = mode + ' · ' + (data.rows.length ? '已核验' : '仅原文');
   $('provenance-mode').textContent = mode + ' · 核验日 ' + doc.reviewed_on + ' · 本地读取';
   const unit = $('unit');
   unit.options[0].textContent = '亿' + currencyNames[data.currency];
   unit.options[1].textContent = '百万' + currencyNames[data.currency];
   unit.disabled = !data.rows.length;
-  appendNarrative($('business'), 'business', '报告中的业务说明', data.narrative, link);
-  appendNarrative($('management'), 'management_statement', '管理层归因原文', data.narrative, link);
+  if (issuer.industry && !data.narrative.some(item => item.kind === 'business')) {
+    $('business').replaceChildren(el('p', '', 'SEC 行业分类 · ' + issuer.industry));
+  } else {
+    appendNarrative($('business'), 'business', '报告中的业务说明', data.narrative, link);
+  }
+  $('management').replaceChildren(el('p', 'minor', '管理层归因待原文语义核验。'));
   const components = $('composition');
   components.replaceChildren();
   for (const item of data.segments) {
@@ -234,7 +367,14 @@ function render(data) {
   $('facts-caption').textContent = data.rows.length + ' 项指标 · ' + data.unit + ' · ' + data.accounting_label;
   $('financial-table').hidden = !data.rows.length;
   $('financial-empty').hidden = !!data.rows.length;
-  $('financial-empty').textContent = '已核验官方披露与附件。附件财务数字尚未结构化。';
+  $('financial-empty').textContent = doc.attachments?.length
+    ? '已核验官方披露与附件。附件财务数字尚未结构化。'
+    : '报告原文已找到，当前没有通过核验的财务数字。';
+  const gaps = $('financial-gaps');
+  const missing = data.metric_outcomes.filter(item => item.status !== 'verified');
+  gaps.replaceChildren(...missing.map(item => el('li', '', item.label + ' · ' +
+    (factStatuses[item.status] || '尚未核验'))));
+  gaps.hidden = !missing.length;
   const filing = el('div', 'filing'), filingText = el('div');
   filingText.append(el('h3', '', doc.form + ' · ' + (doc.label || doc.report_end)), el('p', '', '申报日 ' + doc.published_on));
   filing.append(filingText, link('查看官方原文', doc));
@@ -245,7 +385,8 @@ function render(data) {
     node.append(link(attachment.label, attachment));
     disclosures.append(node);
   }
-  $('announcement-state').textContent = data.sections.announcements.label;
+  if (researchInfo) renderAnnouncements();
+  else $('announcement-state').textContent = data.sections.announcements.label;
   $('media-state').textContent = data.sections.reporting.label;
   renderRows(data, link);
   model = data;
@@ -305,11 +446,39 @@ function renderRows(data, link) {
   }
 }
 
+function renderAnnouncements() {
+  const current = researchInfo?.announcements;
+  if (!current) return;
+  const state = current.state === 'observed' ? 'SEC 目录覆盖此窗口' : '覆盖不完整';
+  $('announcement-state').textContent = current.start + ' 至 ' + current.end + '（美东申报日） · ' + state;
+  const list = $('filing-record');
+  list.replaceChildren();
+  if (!current.entries.length) {
+    list.append(el('p', 'minor', current.state === 'observed'
+      ? '此次目录观察范围内未找到 8-K 或 6-K。' : '当前可读目录中未找到公告，覆盖仍待核验。'));
+    return;
+  }
+  for (const entry of current.entries) {
+    const card = el('article', 'filing'), copy = el('div');
+    const codes = entry.items.filter(item => item.code !== '9.01');
+    const title = codes[0]?.label || (entry.form.startsWith('6-K') ? '外国私人发行人报告' : '当前报告');
+    const codeText = entry.items.map(item => item.code + ' ' + item.label).join(' · ');
+    copy.append(el('h3', '', title + (entry.is_amendment ? ' · 修订' : '')),
+      el('p', 'filing-meta', entry.form + ' · ' + entry.published_on),
+      el('p', '', codeText ? 'SEC 事项分类：' + codeText : entry.summary));
+    card.append(copy, sourceLink('查看 SEC 原文', entry, cik, entry.accession));
+    list.append(card);
+  }
+}
+
 async function readSelected() {
-  if ($('report').disabled) return cik ? loadReports() : initialize();
+  if ($('report').disabled) return cik ? startResearch() : initialize();
+  const accession = $('report').value;
+  const report = reportList.find(item => item.accession === accession);
+  if (report?.status === 'discovered') return startResearch(accession);
   const id = beginLoad();
   try {
-    const data = await request('/api/reader', {cik, accession: $('report').value, unit: $('unit').value});
+    const data = await request('/api/reader', {cik, accession, unit: $('unit').value});
     if (id === loadID) render(data);
   } catch (error) {
     if (id === loadID) displayError(error);
@@ -320,10 +489,23 @@ async function readSelected() {
 $('report').addEventListener('change', readSelected);
 $('unit').addEventListener('change', readSelected);
 $('retry').addEventListener('click', readSelected);
+$('research-action').addEventListener('click', () => startResearch());
 
 async function initialize() {
   try {
-    const params = initial.get('cik') ? {cik: initial.get('cik')} : {};
+    const initialCik = initial.get('cik');
+    if (initialCik) {
+      const saved = await request('/api/research', {cik: initialCik});
+      if (!cik && saved.issuer) {
+        selectIssuer(saved.issuer, initial.get('report'), false);
+        researchInfo = saved;
+        $('research-action').hidden = false;
+        researchSummary(saved);
+        renderAnnouncements();
+        return;
+      }
+    }
+    const params = initialCik ? {cik: initialCik} : {};
     const data = await request('/api/reader', params);
     if (!cik) selectIssuer(data.issuer, initial.get('report'));
   } catch (error) {

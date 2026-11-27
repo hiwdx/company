@@ -1,7 +1,7 @@
 """Evidence-bound Chinese reader for the reviewed company catalog."""
 from .catalog import issuers
 from .domain import CURRENCIES, EvidenceError, display_amount, number, validate_claim, yoy
-from .importer import METRICS
+from .auto_facts import GROUPS
 
 
 STATUS_LABELS = {
@@ -28,7 +28,8 @@ def read_model(dataset, divisor='100000000'):
     currency = doc.get('currency', next(iter(facts.values()))['currency'] if facts else None)
     unit = ('亿' if divisor == '100000000' else '百万') + CURRENCIES[currency]
     rows, claims = [], []
-    for metric, label, _, _, statement, meaning in METRICS:
+    for definition in GROUPS[dataset.get('metric_profile', 'industrial')]:
+        metric, label, statement, meaning = definition.key, definition.label, definition.statement, definition.meaning
         current, prior = slots.get((metric, 'current')), slots.get((metric, 'prior'))
         if current is None:
             continue
@@ -71,7 +72,10 @@ def read_model(dataset, divisor='100000000'):
             'rows': rows, 'claims': claims, 'unit': unit,
             'segments': [{'name': fact['segment'], 'amount': display_amount(fact, divisor), 'fact': fact}
                          for fact in components],
-            'narrative': [{**item, 'source_url': doc['original_url']} for item in dataset.get('narrative', [])],
+            'narrative': [{**item, 'source_url': doc['original_url']} for item in dataset.get('narrative', [])
+                          if item['kind'] == 'business'],
+            'metric_outcomes': dataset.get('metric_outcomes', []),
+            'metric_profile': dataset.get('metric_profile', 'industrial'),
             'sections': {'announcements': {'status': 'partial', 'label': '近 90 天重大公告覆盖尚未核验。'},
                          'reporting': {'status': 'policy_blocked', 'label': '媒体来源使用许可待确认。'}},
             'status_labels': STATUS_LABELS}

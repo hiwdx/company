@@ -24,18 +24,24 @@
           <input type="search" id="company-query" name="q" autocomplete="off" maxlength="100" placeholder="输入代码或公司名称" aria-describedby="search-scope">
           <button type="submit" class="solid-button">搜索</button>
         </div>
-        <p id="search-scope">原型覆盖 AAPL、MSFT、NVDA、TSM，支持代码和中英文名称。</p>
+        <p id="search-scope">输入证券代码或 SEC 目录中的公司名称。</p>
       </form>
       <p id="search-status" class="minor" role="status"></p>
+      <p id="directory-status" class="minor"></p>
       <ul id="search-results" aria-label="发行人候选" hidden></ul>
     </section>
     <section class="opening" aria-labelledby="company-title">
       <p id="company-meta" class="company-meta"></p>
       <h1 id="company-title">上市公司阅读器</h1>
       <p id="company-intro" class="intro">从官方财报阅读经营表现，逐项核对原文。</p>
+      <details id="other-securities" class="other-securities" hidden><summary></summary><ul></ul></details>
       <div class="report-line">
         <label for="report" class="report-picker">选择报告 <select id="report" disabled><option>正在读取报告</option></select></label>
-        <span id="snapshot-label" class="source-state">本地快照 · 非实时</span>
+        <span id="snapshot-label" class="source-state">本地快照</span>
+      </div>
+      <div class="research-controls">
+        <button id="research-action" type="button" class="research-action" hidden>读取最新报告</button>
+        <p id="research-state" class="minor" role="status"></p>
       </div>
     </section>
     <nav class="section-nav" aria-label="阅读栏目">
@@ -45,7 +51,7 @@
       <button type="button" data-section="reporting"><span>报道</span><small>接入状态</small></button>
     </nav>
     <div id="loading" class="loading" role="status">正在校验本地证据与计算结果…</div>
-    <section id="error" class="error-state" hidden aria-labelledby="error-title"><h2 id="error-title">暂时无法读取这份财报</h2><p id="error-description">获取失败，不代表公司未披露。请检查本地服务和证据快照后重试。</p><button type="button" id="retry" class="solid-button">重新读取</button></section>
+    <section id="error" class="error-state" hidden aria-labelledby="error-title"><h2 id="error-title">暂时无法读取这份财报</h2><p id="error-description">读取失败。请检查本地证据后重试。</p><p id="error-source"></p><button type="button" id="retry" class="solid-button">重新读取</button></section>
     <section id="overview" class="reading-layout" hidden aria-label="经营概览">
       <article class="reading-copy">
         <div class="section-heading"><h2>经营概览</h2></div>
@@ -62,11 +68,11 @@
     <section id="financials" hidden aria-labelledby="financials-title">
       <div class="financial-heading"><div><h2 id="financials-title">财务事实与原文</h2></div><label class="unit-select">显示单位<select id="unit"><option value="hundred_millions">亿元</option><option value="millions">百万</option></select></label></div>
       <p class="table-intro">本期与比较期沿用同份文件的口径。比较日期见各指标，单季与财年累计分开列示。</p>
-      <p id="financial-empty" hidden></p><div id="financial-table" class="table-scroll" tabindex="0" aria-label="核心财务事实，可横向滚动"><table><caption id="facts-caption">核心财务事实</caption><thead><tr><th scope="col">指标与口径</th><th scope="col">本期</th><th scope="col">比较期</th><th scope="col">同比</th><th scope="col">核对出处</th></tr></thead><tbody id="facts-table"></tbody></table></div>
+      <p id="financial-empty" hidden></p><ul id="financial-gaps" class="minor financial-gaps" hidden></ul><div id="financial-table" class="table-scroll" tabindex="0" aria-label="核心财务事实，可横向滚动"><table><caption id="facts-caption">核心财务事实</caption><thead><tr><th scope="col">指标与口径</th><th scope="col">本期</th><th scope="col">比较期</th><th scope="col">同比</th><th scope="col">核对出处</th></tr></thead><tbody id="facts-table"></tbody></table></div>
       <div class="calculation-section"><h3>计算是如何得到的</h3><p>同比 =（本期原值 ÷ 比较期原值 − 1）× 100。仅对通过口径校验的两期计算。</p><div id="calculation-detail"></div></div>
       <details class="context-details"><summary>报告期、单位与版本说明</summary><div id="report-context"></div></details>
     </section>
-    <section id="announcements" hidden aria-labelledby="announcements-title" class="coverage-section"><h2 id="announcements-title">已核验披露</h2><div id="filing-record"></div><p id="announcement-state" class="coverage-state"></p></section>
+    <section id="announcements" hidden aria-labelledby="announcements-title" class="coverage-section"><h2 id="announcements-title">近 90 天官方公告</h2><p id="announcement-state" class="coverage-state"></p><div id="filing-record"></div></section>
     <section id="reporting" hidden aria-labelledby="reporting-title" class="coverage-section"><h2 id="reporting-title">报道接入状态</h2><p id="media-state" class="coverage-state"></p></section>
     <div class="reader-footer-note"><p id="provenance-mode">来源与核验时间正在加载</p><p>只组织和解释公开事实。不预测股价、不荐股、不评级，不提供买卖建议。</p></div>
   </main>

@@ -23,7 +23,8 @@ class InlineParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.contexts, self.units, self.facts = {}, {}, []
         self.context = self.unit = None
-        self.anchors, self.metadata = set(), []
+        self.anchors, self.duplicate_anchors, self.metadata = set(), set(), []
+        self.table_depth = self.hidden_depth = 0
         self.non_numeric = None
         self.number_stack = []
         self.field = None
@@ -38,7 +39,13 @@ class InlineParser(HTMLParser):
         if self.blocked_active_depth:
             return
         if ANCHOR.fullmatch(attrs.get('id') or ''):
+            if attrs['id'] in self.anchors:
+                self.duplicate_anchors.add(attrs['id'])
             self.anchors.add(attrs['id'])
+        if tag == 'table':
+            self.table_depth += 1
+        if tag in ('ix:hidden', 'ix:header'):
+            self.hidden_depth += 1
         if tag == 'ix:nonnumeric' and (attrs.get('name') or '').startswith('dei:'):
             self.non_numeric = {'attrs': attrs, 'text': ''}
         if tag == 'xbrli:context':
@@ -67,7 +74,8 @@ class InlineParser(HTMLParser):
             # iXBRL can validly nest equivalent facts for different contexts.
             if len(self.number_stack) >= 32:
                 raise EvidenceError('numeric_nesting_limit')
-            self.number_stack.append({'attrs': attrs, 'text': ''})
+            self.number_stack.append({'attrs': attrs, 'text': '', 'in_table': self.table_depth > 0,
+                                      'hidden': self.hidden_depth > 0})
 
     def handle_data(self, data):
         if self.blocked_active_depth:
@@ -89,6 +97,10 @@ class InlineParser(HTMLParser):
             return
         if self.blocked_active_depth:
             return
+        if tag == 'table':
+            self.table_depth = max(0, self.table_depth - 1)
+        if tag in ('ix:hidden', 'ix:header'):
+            self.hidden_depth = max(0, self.hidden_depth - 1)
         if tag == self.field:
             self.field = None
         if tag == 'xbrli:context' and self.context is not None:
@@ -109,7 +121,7 @@ class InlineParser(HTMLParser):
             self.unit = None
         if tag == 'ix:nonfraction' and self.number_stack:
             self.facts.append(self.number_stack.pop())
-        if len(self.facts) > 20000 or len(self.contexts) > 5000:
+        if len(self.facts) > 45000 or len(self.contexts) > 12000:
             raise EvidenceError('document_complexity_limit')
 
 

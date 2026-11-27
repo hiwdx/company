@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
+DIRECTORY_URL = "https://www.sec.gov/files/company_tickers_exchange.json"
 MAX_BODY = 24 * 1024 * 1024
 ACCESSION = re.compile(r'\d{10}-\d{2}-\d{6}')
 PRIMARY = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]*\.html?')
@@ -23,6 +24,7 @@ class SourceResult:
     body: bytes = b''
     http_status: int = 0
     mime: str = ''
+    server_date: str = ''
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -138,7 +140,8 @@ class SECClient:
             raise ValueError('Only canonical SEC HTTPS destinations are accepted')
         archive = re.fullmatch(r'/Archives/edgar/data/[1-9]\d{0,9}/\d{18}/[A-Za-z0-9][A-Za-z0-9._-]*\.html?', parsed.path)
         data = re.fullmatch(r'/submissions/CIK\d{10}(?:-submissions-\d+)?\.json|/api/xbrl/companyfacts/CIK\d{10}\.json', parsed.path)
-        if not ((parsed.netloc == 'www.sec.gov' and expected == 'html' and archive)
+        if not ((url == DIRECTORY_URL and expected == 'json')
+                or (parsed.netloc == 'www.sec.gov' and expected == 'html' and archive)
                 or (parsed.netloc == 'data.sec.gov' and expected == 'json' and data)):
             raise ValueError('Unapproved SEC endpoint')
         if self.stopped:
@@ -168,7 +171,7 @@ class SECClient:
                                 state = 'error_document'
                     except (ValueError, UnicodeError):
                         state = 'parse_failed'
-                return SourceResult(state, body if state == 'ok' else b'', status, mime)
+                return SourceResult(state, body if state == 'ok' else b'', status, mime, response.headers.get('Date', ''))
         except HTTPError as exc:
             mime = exc.headers.get('Content-Type', '')
             return SourceResult(self.record_status(exc.code, mime, expected), http_status=exc.code, mime=mime)
