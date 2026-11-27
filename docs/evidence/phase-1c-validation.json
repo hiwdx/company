@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "offline_regression": {"total": 44, "passed": 44, "external_requests": 0},
+  "static_checks": ["python compileall", "node --check"],
+  "real_official_blind_test": {
+    "issuers": 3, "periodic_filings": 3, "verified_current_metrics": 20,
+    "applicable_current_metrics": 21, "manually_checked_values": 40, "mismatches": 0
+  },
+  "isolated_worker_cache_replay": {"issuers": 3, "matching_values": 40, "external_requests": 0},
+  "live_browser_historical_selection": {"issuer": "COST", "accession": "0000909832-26-000051", "new_sec_document_requests": 1},
+  "browser_checks": [
+    "Costco official-name search, keyboard candidate selection and direct filing anchor",
+    "Historical report opens through its discovered directory record",
+    "Missing Coca-Cola liabilities remains visible as a gap",
+    "JPM bank metrics, negative cumulative cash flow and USD display units",
+    "Unknown issuer directory status, day/night themes and official 8-K links",
+    "Observable 90-day coverage independent of JPM archived pagination"
+  ],
+  "browser_css_viewports": {"desktop": [1440, 1000], "mobile": [390, 844], "mobile_document_width": 390},
+  "screenshots": [
+    "phase1c-desktop-sec-search.jpg", "phase1c-desktop-cost-filing.jpg",
+    "phase1c-desktop-cost-history.jpg", "phase1c-desktop-ko-coverage.jpg",
+    "phase1c-mobile-jpm-disclosures.jpg", "phase1c-mobile-jpm-financials.jpg"
+  ],
+  "screenshot_delivery": "local review package"
+}

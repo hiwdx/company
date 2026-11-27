@@ -6,11 +6,14 @@ import sqlite3
 from .domain import ACCESSION, ANCHOR, CURRENCIES, SHA, STANDARDS, EvidenceError, evidence_url, report_group, verify_fact
 
 
-ACQUISITION = {'manual_import', 'sec_official_single_run', 'sec_adapter_snapshot', 'legacy_reviewed_snapshot'}
+ACQUISITION = {'manual_import', 'sec_official_single_run', 'sec_adapter_snapshot', 'legacy_reviewed_snapshot', 'sec_on_demand'}
 
 
 def validate_dataset(data):
-    if data.get('dataset_kind') != 'real_official_reviewed_snapshot' or data.get('acquisition_mode') not in ACQUISITION:
+    recognized = (data.get('dataset_kind') == 'real_official_reviewed_snapshot'
+                  or (data.get('dataset_kind') == 'real_official_auto_verified'
+                      and data.get('schema_version') == 3 and data.get('acquisition_mode') == 'sec_on_demand'))
+    if not recognized or data.get('acquisition_mode') not in ACQUISITION:
         raise EvidenceError('unapproved_snapshot')
     issuer, doc, facts = data['issuer'], data['document'], data['facts']
     cik = issuer['cik']
@@ -32,9 +35,14 @@ def validate_dataset(data):
         evidence_url(attachment['url'], cik, accession)
         if not SHA.fullmatch(attachment['sha256']):
             raise EvidenceError('invalid_attachment_hash')
+    automatic = data.get('schema_version') == 3
+    if automatic and (not SHA.fullmatch(doc.get('companyfacts_sha256', '')) or data.get('narrative')):
+        raise EvidenceError('missing_automatic_evidence_receipt')
     ids, slots = set(), set()
     for fact in facts:
         verify_fact(fact)
+        if automatic and fact.get('verification') != 'automatic_ixbrl_companyfacts_match':
+            raise EvidenceError('unverified_automatic_fact')
         slot = fact.get('slot', 'current' if fact['period_end'] == doc['report_end'] else 'prior')
         key = (fact.get('segment', fact['metric']), slot)
         if (fact['id'] in ids or key in slots or slot not in ('current', 'prior')
@@ -48,7 +56,7 @@ def validate_dataset(data):
                 or fact['scope'] != ('segment' if fact['metric'] == 'segment_revenue' else doc['scope'])
                 or fact['accounting_standard'] != doc['accounting_standard']):
             raise EvidenceError('document_fact_version_mismatch')
-        if data.get('schema_version') == 2 and (not fact.get('cik') or not fact.get('original_sha256')):
+        if data.get('schema_version') in (2, 3) and (not fact.get('cik') or not fact.get('original_sha256')):
             raise EvidenceError('missing_fact_version_identity')
     for narrative in data.get('narrative', []):
         if (narrative['kind'] not in ('business', 'management_statement') or not narrative['text']

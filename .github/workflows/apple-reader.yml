@@ -1,4 +1,4 @@
-name: Apple reader offline checks
+name: Company reader offline checks
 on: [pull_request]
 permissions:
   contents: read

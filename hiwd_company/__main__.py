@@ -1,8 +1,10 @@
 import argparse
 import json
+import os
 from pathlib import Path
 
 from .catalog import ROOT
+from .discovery import Research
 from .importer import replay_snapshot
 from .server import serve
 from .store import Store
@@ -14,6 +16,8 @@ def main():
     run = commands.add_parser('serve')
     run.add_argument('--port', type=int, default=8765)
     run.add_argument('--db', default=str(ROOT / 'local-results/reader.sqlite'))
+    run.add_argument('--research-cache', default=str(ROOT / 'local-results/sec-research.sqlite'))
+    run.add_argument('--allow-sec', action='store_true', help='仅在获许可的本机开启低频 SEC 请求')
     imp = commands.add_parser('import-original', help='本地原文重放')
     imp.add_argument('--snapshot', type=Path, required=True)
     imp.add_argument('--html', type=Path, required=True)
@@ -34,7 +38,14 @@ def main():
     else:
         for path in sorted((ROOT / 'data/reports').glob('*.json')):
             store.put(json.loads(path.read_text(encoding='utf-8')), seed=True)
-        serve(store, args.port)
+        user_agent = os.environ.get('SEC_USER_AGENT') if args.allow_sec else None
+        if args.allow_sec and not user_agent:
+            parser.error('--allow-sec requires an authorized SEC_USER_AGENT')
+        research = Research(args.research_cache, user_agent=user_agent)
+        try:
+            serve(store, args.port, research)
+        finally:
+            research.close()
 
 
 if __name__ == '__main__':
