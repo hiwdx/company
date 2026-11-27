@@ -1,0 +1,1363 @@
+{
+  "provider": "WeStock",
+  "binary_sha256": "8018d5f7fe8efbd97887afee4d79f8c6cd900b586b99ea0de6d1ce7d53abdb8c",
+  "results": [
+    {
+      "at": "2026-11-27T08:32:15.356073+00:00",
+      "command": [
+        "westock",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "91d7af2d1334c53ef9b40e2656a79f9395adb5becdee9b4deacead33b08aa08f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 47,
+      "summary": {
+        "tables": [],
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "version": "westock version westock 0.0.2 channel=skillhub",
+      "elapsed_ms": 21
+    },
+    {
+      "at": "2026-11-27T08:32:16.481899+00:00",
+      "command": [
+        "westock",
+        "profile",
+        "usAAPL,usTSM"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "84df5fd10ee85aa2376a1bd5f00c1e99be9658b5ce7ba1a463154848ddf624f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1756,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "listedDate",
+              "introduction",
+              "website",
+              "industry",
+              "exchange"
+            ],
+            "row_count": 2
+          }
+        ],
+        "identities": [
+          {
+            "code": "usAAPL",
+            "name": "Apple Inc."
+          },
+          {
+            "code": "usTSM",
+            "name": "Taiwan Semiconductor Manufacturing"
+          }
+        ],
+        "multiline_rows_may_be_unparsed": true,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 3025
+    },
+    {
+      "at": "2026-11-27T08:32:20.607782+00:00",
+      "command": [
+        "westock",
+        "finance",
+        "usAAPL,usTSM",
+        "--limit",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "bacd39f64991973ee9cd09149c8b7fda198994e5b6cf8a0f59be18e2b0c66684",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 4111,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "DisclosureCurrency",
+              "BasicEPS_Q",
+              "DilutedEPS_Q",
+              "EBITDA_Q",
+              "EBIT_Q",
+              "GrossIncome_Q",
+              "GrossMargin_Q",
+              "NetIncome_Q",
+              "NetMargin_Q",
+              "PretaxIncome_Q",
+              "Sales_Q"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "DisclosureCurrency",
+              "CurrentAssets",
+              "CurrentLiabilities",
+              "LiabilityToAsset",
+              "LongTermDebt",
+              "ROA",
+              "ROE",
+              "ShareHolderEquity",
+              "ShortTermDebt",
+              "TotalAssets",
+              "TotalEquity",
+              "TotalLiabilities"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "DisclosureCurrency",
+              "CFF_Q",
+              "CFI_Q",
+              "CFO_Q",
+              "Capex_Q",
+              "FreeCF_Q"
+            ],
+            "row_count": 8
+          }
+        ],
+        "period_metadata": [
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usAAPL",
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "code": "usTSM",
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "TWD"
+          }
+        ],
+        "numeric_values_saved": false,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4456
+    },
+    {
+      "at": "2026-11-27T08:32:26.169246+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "usAAPL,usTSM",
+        "--type",
+        "1",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "2545783f5ed6841a2a272e446901cdd53e24bc074733a74cbd80b886ea1c19e4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1051,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "chineseTitle",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "chineseTitle",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nou5493647",
+            "symbol": "usAAPL",
+            "time": "2026-11-03 08:06:00",
+            "update_time": "2026-11-03 21:09:35"
+          },
+          {
+            "id": "nou5343849",
+            "symbol": "usAAPL",
+            "time": "2026-07-31 06:07:25",
+            "update_time": "2026-07-31 18:09:58"
+          },
+          {
+            "id": "nou5145682",
+            "symbol": "usTSM",
+            "time": "2026-04-16 06:06:58",
+            "update_time": "2026-04-16 19:10:56"
+          },
+          {
+            "id": "nou4382020",
+            "symbol": "usTSM",
+            "time": "2025-04-17 06:17:09",
+            "update_time": "2025-04-17 21:10:38"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5021
+    },
+    {
+      "at": "2026-11-27T08:32:32.294432+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nou5493647"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c487105af21dde625705b569a84166c9fbaf2a857825103e03bd0114bfc41b84",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 132,
+      "summary": {
+        "tables": [],
+        "public_urls": [
+          "http://file.finance.qq.com/finance/us/doc/convpdf/2026/11/03/19895604.pdf"
+        ],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4495
+    },
+    {
+      "at": "2026-11-27T08:32:37.893808+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nou5145682"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "2bc5908f44506ba9dfaf1eeb7f7c6516b651f295fef0817d056b3a91a396dd02",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 172,
+      "summary": {
+        "tables": [],
+        "public_urls": [
+          "http://file.finance.qq.com/finance/us/doc/convpdf/2026/04/16/19344740.pdf"
+        ],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 772
+    },
+    {
+      "at": "2026-11-27T08:32:39.769318+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "usAAPL,usTSM",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "d757683f23e9e5ee4851f8c9bd60d77462618e67710f0bb5893e0ba5ef94214f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1168,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "chineseTitle",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "chineseTitle",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nou5540138",
+            "symbol": "usAAPL",
+            "time": "2026-11-25 18:30:42",
+            "update_time": "2026-11-26 07:39:43"
+          },
+          {
+            "id": "nou5539117",
+            "symbol": "usAAPL",
+            "time": "2026-11-25 16:03:54",
+            "update_time": "2026-11-26 05:13:47"
+          },
+          {
+            "id": "nou5537306",
+            "symbol": "usTSM",
+            "time": "2026-11-25 06:11:34",
+            "update_time": "2026-11-25 19:19:21"
+          },
+          {
+            "id": "nou5537285",
+            "symbol": "usTSM",
+            "time": "2026-11-25 06:07:33",
+            "update_time": "2026-11-25 19:16:30"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4944
+    },
+    {
+      "at": "2026-11-27T08:32:45.816371+00:00",
+      "command": [
+        "westock",
+        "profile",
+        "hk00700,hk09988"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "1c62691a6ac272e9d03ba01f01430ea64a8f6f24dcec6c5c7d5a3550db21b931",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 4339,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "listedDate",
+              "introduction",
+              "business",
+              "website",
+              "chairman",
+              "industry",
+              "regAddress",
+              "tel",
+              "email"
+            ],
+            "row_count": 0
+          }
+        ],
+        "identities": [
+          {
+            "code": "hk00700",
+            "name": "腾讯控股有限公司"
+          },
+          {
+            "code": "hk09988",
+            "name": "阿里巴巴集团控股有限公司"
+          }
+        ],
+        "multiline_rows_may_be_unparsed": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5144
+    },
+    {
+      "at": "2026-11-27T08:32:52.066216+00:00",
+      "command": [
+        "westock",
+        "finance",
+        "hk00700,hk09988",
+        "--limit",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "72d7c95e611fa1a6cdaf13a96521f4aae38a4453f678550f8a16ca8bd19293f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 5979,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "CurrencyType",
+              "BasicEPS",
+              "DebtAssetsRatio",
+              "EPS",
+              "EarningAfterTax",
+              "EarningBeforeTax",
+              "GrossIncomeRatio",
+              "NetProfitGr1y",
+              "NetProfitRatio",
+              "NpParentCompanyGr1y",
+              "NpParentCompanyGr3y",
+              "OperExpenses",
+              "OperatingIncome",
+              "OperatingProfit",
+              "OperatingRevenueGr1y",
+              "OperatingRevenueGr3y",
+              "ProfitToShareholders",
+              "ROA",
+              "RoeWeighted"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "CurrencyType",
+              "Cash",
+              "Goodwill",
+              "SeWithoutMinority",
+              "TotalAssets",
+              "TotalCurrentAssets",
+              "TotalCurrentLiability",
+              "TotalEquity",
+              "TotalLiability",
+              "TotalNonCurrentAssets",
+              "TotalNonCurrentLiability"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "CurrencyType",
+              "CFF",
+              "CFI",
+              "CFO",
+              "Cashequivalentincrease"
+            ],
+            "row_count": 8
+          }
+        ],
+        "period_metadata": [
+          {
+            "code": "hk00700",
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk00700",
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "code": "hk09988",
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          }
+        ],
+        "numeric_values_saved": false,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5117
+    },
+    {
+      "at": "2026-11-27T08:32:58.287418+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "hk00700,hk09988",
+        "--type",
+        "1",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "638e455c4ae5a87eecb8dd0ec12b2379b51e851fc738549d57c451122ea0f3b5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1124,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nokHKEX-EPS-20261118-12416824",
+            "symbol": "hk00700",
+            "time": "2026-11-18 16:30:43",
+            "update_time": "2026-11-18 16:31:25"
+          },
+          {
+            "id": "nokHKEX-EPS-20260812-12280991",
+            "symbol": "hk00700",
+            "time": "2026-08-12 16:31:07",
+            "update_time": "2026-08-12 16:31:56"
+          },
+          {
+            "id": "nokHKEX-EPS-20261119-12418764",
+            "symbol": "hk09988",
+            "time": "2026-11-19 18:16:02",
+            "update_time": "2026-11-19 18:16:15"
+          },
+          {
+            "id": "nokHKEX-EPS-20260820-12292434",
+            "symbol": "hk09988",
+            "time": "2026-08-20 17:46:34",
+            "update_time": "2026-08-20 17:46:47"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5086
+    },
+    {
+      "at": "2026-11-27T08:33:04.479148+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nokHKEX-EPS-20261118-12416824"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "f6f28d1fe67d0b81a59184fa6b759dac0f0c35a30755e18edec51adf1a50d527",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 190,
+      "summary": {
+        "tables": [],
+        "public_urls": [
+          "http://file.finance.qq.com//finance/hk/pdf/20261118/HKEX-EPS_20261118_12416824_0.pdf"
+        ],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4351
+    },
+    {
+      "at": "2026-11-27T08:33:09.935455+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nokHKEX-EPS-20261119-12418764"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "4fa44d4b562da9303a0e3ffa2e5e1883d0a3993815c123ae5cc08326c0819608",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 204,
+      "summary": {
+        "tables": [],
+        "public_urls": [
+          "http://file.finance.qq.com//finance/hk/pdf/20261119/HKEX-EPS_20261119_12418764_0.pdf"
+        ],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4460
+    },
+    {
+      "at": "2026-11-27T08:33:15.500330+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "hk00700,hk09988",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "a85345da54bfb1e64738d81e9c16d997439943d9a7241b6e0ac62eb54e0459a4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1137,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 0
+          }
+        ],
+        "records": [
+          {
+            "id": "nokHKEX-EPS-20261118-12416824",
+            "symbol": "hk00700",
+            "time": "2026-11-18 16:30:43",
+            "update_time": "2026-11-18 16:31:25"
+          },
+          {
+            "id": "nokHKEX-EPS-20261105-12401981",
+            "symbol": "hk00700",
+            "time": "2026-11-05 16:55:15",
+            "update_time": "2026-11-05 16:56:22"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5050
+    },
+    {
+      "at": "2026-11-27T08:33:21.652696+00:00",
+      "command": [
+        "westock",
+        "profile",
+        "sh600519,sh601398"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e60c4b39084c8a4fa049fe2f01845d90bab0dd1d740c482ef7b60ec5abdc0da4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1066,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "listedDate",
+              "business",
+              "website",
+              "chairman",
+              "industry",
+              "sector",
+              "issuePrice",
+              "regCapital",
+              "establishDate",
+              "regAddress",
+              "officeAddress",
+              "tel",
+              "email"
+            ],
+            "row_count": 2
+          }
+        ],
+        "identities": [
+          {
+            "code": "sh600519",
+            "name": "贵州茅台"
+          },
+          {
+            "code": "sh601398",
+            "name": "工商银行"
+          }
+        ],
+        "multiline_rows_may_be_unparsed": true,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4970
+    },
+    {
+      "at": "2026-11-27T08:33:27.726947+00:00",
+      "command": [
+        "westock",
+        "finance",
+        "sh600519,sh601398",
+        "--limit",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "cc4a8769885172cea6d437a8c8245b86e90c9807ff826e51ba601df3c7ad436b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 8678,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "BasicEPS",
+              "DilutedEPS",
+              "DividendTTM",
+              "EBIT",
+              "EPSTTM",
+              "GrossIncomeRatio",
+              "GrossProfitTTM",
+              "NPDeductNonRecurringPL",
+              "NPPCCGrowRate3Y",
+              "NPParentCompanyCutYOY_Q",
+              "NPParentCompanyOwners",
+              "NPParentCompanyOwnersTTM",
+              "NPParentCompanyYOY",
+              "NPParentCompanyYOY_Q",
+              "NetProfitRatio",
+              "ORComGrowRate3Y",
+              "OperatingCost",
+              "OperatingProfit",
+              "OperatingProfitTTM",
+              "OperatingRevenue",
+              "OperatingRevenueGrowRate_Q",
+              "OperatingRevenueTTM",
+              "RAndD",
+              "ROA",
+              "ROATTM",
+              "ROE",
+              "ROECut",
+              "ROETTM",
+              "ROEWeighted",
+              "ROIC",
+              "TORGrowRate",
+              "TORGrowRate_Q",
+              "TotalOperatingRevenue",
+              "TotalProfit"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "ARTRate",
+              "CashEquivalents",
+              "CurrentRatio",
+              "DebtAssetsRatio",
+              "DebtEquityRatio",
+              "InterestBearDebt",
+              "InventoryTRate",
+              "NAPS",
+              "QuickRatio",
+              "SEWithoutMI",
+              "TotalAssetTRate",
+              "TotalCurrentAssets",
+              "TotalCurrentLiability",
+              "TotalLiability",
+              "TotalNonCurrentAssets",
+              "TotalNonCurrentLiability",
+              "TotalShareholderEquity",
+              "WorkingCapital"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "FCFE",
+              "FCFF",
+              "GoodsSaleServiceRenderCash",
+              "NetCashFlowTTM",
+              "NetFinanceCashFlow",
+              "NetFinanceCashFlowTTM",
+              "NetInvestCashFlow",
+              "NetInvestCashFlowTTM",
+              "NetOperateCashFlow",
+              "NetOperateCashFlowTTM",
+              "OperCashFlowPS"
+            ],
+            "row_count": 8
+          }
+        ],
+        "period_metadata": [
+          {
+            "code": "sh600519",
+            "EndDate": "2026-09-30"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-06-30"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-03-31"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2025-12-31"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-09-30"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-06-30"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-03-31"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2025-12-31"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-09-30"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-06-30"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-03-31"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2025-12-31"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-09-30"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-06-30"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-03-31"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2025-12-31"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-09-30"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-06-30"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2026-03-31"
+          },
+          {
+            "code": "sh600519",
+            "EndDate": "2025-12-31"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-09-30"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-06-30"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2026-03-31"
+          },
+          {
+            "code": "sh601398",
+            "EndDate": "2025-12-31"
+          }
+        ],
+        "numeric_values_saved": false,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5172
+    },
+    {
+      "at": "2026-11-27T08:33:34.002589+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "sh600519,sh601398",
+        "--type",
+        "1",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "5ff2b1c9e465025ed2b61164ec890287f52674f1b1a87e2af759e68fad312766",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1113,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nos1225649896",
+            "symbol": "sh600519",
+            "time": "2026-10-30 18:31:37",
+            "update_time": "2026-10-30 18:40:37"
+          },
+          {
+            "id": "nos1225475868",
+            "symbol": "sh600519",
+            "time": "2026-08-14 20:41:29",
+            "update_time": "2026-08-14 20:48:51"
+          },
+          {
+            "id": "nos1225648840",
+            "symbol": "sh601398",
+            "time": "2026-10-30 17:34:09",
+            "update_time": "2026-10-30 17:49:47"
+          },
+          {
+            "id": "nos1225648464",
+            "symbol": "sh601398",
+            "time": "2026-10-30 17:23:54",
+            "update_time": "2026-10-30 17:36:38"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5576
+    },
+    {
+      "at": "2026-11-27T08:33:40.680203+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nos1225649896"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c6ae8ba8fa8775c07435013385a8efbbbad6a35817b30c02ab2a45e394226385",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 153,
+      "summary": {
+        "tables": [],
+        "public_urls": [
+          "http://file.finance.qq.com/finance/hs/pdf/2026/10/31/1225649896.PDF"
+        ],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 2583
+    },
+    {
+      "at": "2026-11-27T08:33:44.368866+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nos1225648840"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "a6dba147d9e448674248d57693600b2931f503cba6c9cf05eadb8a983126254b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 164,
+      "summary": {
+        "tables": [],
+        "public_urls": [
+          "http://file.finance.qq.com/finance/hs/pdf/2026/10/31/1225648840.PDF"
+        ],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4195
+    },
+    {
+      "at": "2026-11-27T08:33:49.669090+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "sh600519,sh601398",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "98acc4f5142b38e1a38cad110e78ab21552e95896752a73a8b690e941270e220",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1219,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nos1225652625",
+            "symbol": "sh600519",
+            "time": "2026-11-02 16:59:13",
+            "update_time": "2026-11-02 17:12:22"
+          },
+          {
+            "id": "nos1225649906",
+            "symbol": "sh600519",
+            "time": "2026-10-30 18:31:37",
+            "update_time": "2026-10-30 18:40:38"
+          },
+          {
+            "id": "nos1225669388",
+            "symbol": "sh601398",
+            "time": "2026-11-12 18:09:03",
+            "update_time": "2026-11-12 18:19:28"
+          },
+          {
+            "id": "nos1225669376",
+            "symbol": "sh601398",
+            "time": "2026-11-12 18:09:03",
+            "update_time": "2026-11-12 18:19:07"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4112
+    }
+  ],
+  "started_at": "2026-11-27T08:32:15.355875+00:00",
+  "finished_at": "2026-11-27T08:33:54.901482+00:00",
+  "probe_revision": 2,
+  "stage": "followup",
+  "scope": "single execution environment; no regional SLA claim"
+}
