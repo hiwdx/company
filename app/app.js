@@ -138,6 +138,7 @@ function displayError(error) {
   lastAttempt = error;
   $('error-description').textContent = messages[error.message] || '读取财报失败，请重试。';
   $('snapshot-label').textContent = '财务数字待核验';
+  $('provenance-mode').textContent = '本次财报读取或核验未完成。';
   const target = reportList.find(report => report.accession === $('report').value);
   if (target?.original_url) $('error-source').append(sourceLink('打开 SEC 官方原文', target, cik, target.accession));
   const fallback = researchInfo?.report?.last_verified;
@@ -184,9 +185,11 @@ function selectIssuer(issuer, accession, official = false) {
   $('search-results').hidden = true;
   $('research-state').textContent = '';
   $('research-action').hidden = !official;
+  $('research-action').disabled = false;
+  $('provenance-mode').textContent = '正在核对报告来源。';
   $('report').replaceChildren(el('option', '', '正在查找报告'));
   $('report').disabled = true;
-  if (official) startResearch(accession);
+  if (official && !issuer.has_reviewed_snapshot) startResearch(accession);
   else loadReports(accession);
 }
 
