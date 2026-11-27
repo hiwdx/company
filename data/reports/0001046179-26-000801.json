@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "dataset_kind": "real_official_reviewed_snapshot",
+  "acquisition_mode": "sec_adapter_snapshot",
+  "issuer": {
+    "cik": "0001046179",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "label": "台积电",
+    "aliases": [
+      "TSMC",
+      "Taiwan Semiconductor",
+      "台积电",
+      "台積電",
+      "台灣積體電路製造股份有限公司"
+    ],
+    "issuer_type": "foreign_private_issuer",
+    "securities": [
+      {
+        "ticker": "TSM",
+        "exchange": "NYSE",
+        "type": "ADS",
+        "underlying_shares": 5
+      },
+      {
+        "ticker": "2330",
+        "exchange": "TWSE",
+        "type": "普通股"
+      }
+    ]
+  },
+  "document": {
+    "accession": "0001046179-26-000801",
+    "form": "6-K",
+    "published_on": "2026-11-13",
+    "report_end": "2026-09-30",
+    "currency": "TWD",
+    "accounting_standard": "IAS34_TAIWAN_FSC",
+    "scope": "consolidated",
+    "original_url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/tsm-fsx20261113x6k.htm",
+    "original_sha256": "f55a0ad8aef34eefb09bf0b337dc755efc4c918f2a58495b11ee6a200ef905dd",
+    "reviewed_on": "2026-11-27",
+    "verification_status": "document_verified",
+    "label": "2026 年第三季度合并财务报表",
+    "attachments": [
+      {
+        "label": "第三季度合并财务报表 · 附件 99.1",
+        "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm",
+        "sha256": "8b60d2a0e39d82f9d38f6073b302e9a292526730d1a3c6e9a0b356dd74ba096a",
+        "status": "document_verified"
+      }
+    ]
+  },
+  "narrative": [],
+  "facts": [
+
+  ]
+}

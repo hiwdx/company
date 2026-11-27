@@ -1,0 +1,113 @@
+{
+  "transport": "SECClient",
+  "reports": [
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-24-000123",
+      "store": "imported",
+      "verified_facts": 12,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-25-000073",
+      "store": "imported",
+      "verified_facts": 12,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-25-000079",
+      "store": "imported",
+      "verified_facts": 12,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-26-000006",
+      "store": "imported",
+      "verified_facts": 12,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-26-000013",
+      "store": "imported",
+      "verified_facts": 12,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-26-000020",
+      "store": "imported",
+      "verified_facts": 12,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "AAPL",
+      "accession": "0000320193-26-000026",
+      "store": "imported",
+      "verified_facts": 14,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "NVDA",
+      "accession": "0001045810-26-000021",
+      "store": "imported",
+      "verified_facts": 14,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "full",
+      "ticker": "MSFT",
+      "accession": "0001193125-26-323660",
+      "store": "imported",
+      "verified_facts": 15,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "tsm",
+      "ticker": "TSM",
+      "accession": "0001046179-26-000801",
+      "store": "imported",
+      "verified_facts": 0,
+      "reader_rows": 0,
+      "verification": "document_verified"
+    },
+    {
+      "batch": "tsm",
+      "ticker": "TSM",
+      "accession": "0001628280-26-025362",
+      "store": "imported",
+      "verified_facts": 14,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    },
+    {
+      "batch": "repeat",
+      "ticker": "AAPL",
+      "accession": "0000320193-26-000026",
+      "store": "unchanged",
+      "verified_facts": 14,
+      "reader_rows": 6,
+      "verification": "financials_verified"
+    }
+  ]
+}

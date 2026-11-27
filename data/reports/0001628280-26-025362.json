@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "dataset_kind": "real_official_reviewed_snapshot",
+  "acquisition_mode": "sec_adapter_snapshot",
+  "issuer": {
+    "cik": "0001046179",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "label": "台积电",
+    "aliases": [
+      "TSMC",
+      "Taiwan Semiconductor",
+      "台积电",
+      "台積電",
+      "台灣積體電路製造股份有限公司"
+    ],
+    "issuer_type": "foreign_private_issuer",
+    "securities": [
+      {
+        "ticker": "TSM",
+        "exchange": "NYSE",
+        "type": "ADS",
+        "underlying_shares": 5
+      },
+      {
+        "ticker": "2330",
+        "exchange": "TWSE",
+        "type": "普通股"
+      }
+    ]
+  },
+  "document": {
+    "accession": "0001628280-26-025362",
+    "form": "20-F",
+    "published_on": "2026-04-16",
+    "report_end": "2025-12-31",
+    "currency": "TWD",
+    "accounting_standard": "IFRS_IASB",
+    "scope": "consolidated",
+    "original_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm",
+    "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37",
+    "reviewed_on": "2026-11-27",
+    "verification_status": "financials_verified",
+    "label": "2025 财年年报"
+  },
+  "narrative": [
+    {
+      "kind": "business",
+      "anchor": "i23baf6a49bb94407ab303bcc047de7e5_226",
+      "text": "公司根据客户提供的设计生产半导体，采用专业晶圆代工模式。"
+    },
+    {
+      "kind": "management_statement",
+      "anchor": "i23baf6a49bb94407ab303bcc047de7e5_265",
+      "text": "管理层将收入增长主要归因于先进制程收入占比上升及晶圆出货增加，并指出有部分抵销因素。"
+    }
+  ],
+  "facts": [
+    {"id": "revenue-current", "metric": "revenue", "slot": "current", "anchor": "f-232", "concept": "RevenueFromContractsWithCustomers", "period_kind": "annual", "period_start": "2025-01-01", "period_end": "2025-12-31", "cik": "0001046179", "value": "3809054300000.0", "display_original": "3,809,054.3", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "net_income-current", "metric": "net_income", "slot": "current", "anchor": "f-304", "concept": "ProfitLoss", "period_kind": "annual", "period_start": "2025-01-01", "period_end": "2025-12-31", "cik": "0001046179", "value": "1695124900000.0", "display_original": "1,695,124.9", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "operating_income-current", "metric": "operating_income", "slot": "current", "anchor": "f-264", "concept": "ProfitLossFromOperatingActivities", "period_kind": "annual", "period_start": "2025-01-01", "period_end": "2025-12-31", "cik": "0001046179", "value": "1936091700000.0", "display_original": "1,936,091.7", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "operating_cash_flow-current", "metric": "operating_cash_flow", "slot": "current", "anchor": "f-847", "concept": "CashFlowsFromUsedInOperatingActivities", "period_kind": "annual", "period_start": "2025-01-01", "period_end": "2025-12-31", "cik": "0001046179", "value": "2274975600000.0", "display_original": "2,274,975.6", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "assets-current", "metric": "assets", "slot": "current", "anchor": "f-132", "concept": "Assets", "period_kind": "instant", "period_start": null, "period_end": "2025-12-31", "cik": "0001046179", "value": "7932842500000.0", "display_original": "7,932,842.5", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-3", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "liabilities-current", "metric": "liabilities", "slot": "current", "anchor": "f-195", "concept": "Liabilities", "period_kind": "instant", "period_start": null, "period_end": "2025-12-31", "cik": "0001046179", "value": "2536623300000.0", "display_original": "2,536,623.3", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-3", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "revenue-prior", "metric": "revenue", "slot": "prior", "anchor": "f-231", "concept": "RevenueFromContractsWithCustomers", "period_kind": "annual", "period_start": "2024-01-01", "period_end": "2024-12-31", "cik": "0001046179", "value": "2894307700000.0", "display_original": "2,894,307.7", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-6", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "net_income-prior", "metric": "net_income", "slot": "prior", "anchor": "f-303", "concept": "ProfitLoss", "period_kind": "annual", "period_start": "2024-01-01", "period_end": "2024-12-31", "cik": "0001046179", "value": "1157523900000.0", "display_original": "1,157,523.9", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-6", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "operating_income-prior", "metric": "operating_income", "slot": "prior", "anchor": "f-263", "concept": "ProfitLossFromOperatingActivities", "period_kind": "annual", "period_start": "2024-01-01", "period_end": "2024-12-31", "cik": "0001046179", "value": "1322053000000.0", "display_original": "1,322,053.0", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-6", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "operating_cash_flow-prior", "metric": "operating_cash_flow", "slot": "prior", "anchor": "f-846", "concept": "CashFlowsFromUsedInOperatingActivities", "period_kind": "annual", "period_start": "2024-01-01", "period_end": "2024-12-31", "cik": "0001046179", "value": "1826177100000.0", "display_original": "1,826,177.1", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-6", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "assets-prior", "metric": "assets", "slot": "prior", "anchor": "f-131", "concept": "Assets", "period_kind": "instant", "period_start": null, "period_end": "2024-12-31", "cik": "0001046179", "value": "6691764700000.0", "display_original": "6,691,764.7", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-4", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "liabilities-prior", "metric": "liabilities", "slot": "prior", "anchor": "f-194", "concept": "Liabilities", "period_kind": "instant", "period_start": null, "period_end": "2024-12-31", "cik": "0001046179", "value": "2412493100000.0", "display_original": "2,412,493.1", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "consolidated", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-4", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "segment_revenue-f-2471", "metric": "segment_revenue", "slot": "current", "anchor": "f-2471", "concept": "RevenueFromContractsWithCustomers", "period_kind": "annual", "period_start": "2025-01-01", "period_end": "2025-12-31", "segment": "晶圆", "members": [["ifrs-full:ProductsAndServicesAxis", "tsm:WaferMember"]], "cik": "0001046179", "value": "3272553500000.0", "display_original": "3,272,553.5", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "segment", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-694", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "segment_revenue-f-2474", "metric": "segment_revenue", "slot": "current", "anchor": "f-2474", "concept": "RevenueFromContractsWithCustomers", "period_kind": "annual", "period_start": "2025-01-01", "period_end": "2025-12-31", "segment": "其他产品", "members": [["ifrs-full:ProductsAndServicesAxis", "tsm:OtherProductsMember"]], "cik": "0001046179", "value": "536500800000.0", "display_original": "536,500.8", "currency": "TWD", "unit": "TWD", "scale": 6, "accounting_standard": "IFRS_IASB", "scope": "segment", "version": "0001628280-26-025362", "original_sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37", "source_url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm", "context_id": "c-697", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"}
+  ]
+}

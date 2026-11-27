@@ -17,42 +17,57 @@
     <div class="header-actions"><a href="https://hiwd.com/" rel="noreferrer">hiwd 主站</a><button id="theme" type="button" aria-label="切换到夜间模式">夜间</button></div>
   </header>
   <main id="content" class="shell" tabindex="-1">
+    <section class="lookup" aria-label="搜索公司">
+      <form id="search-form" role="search">
+        <label for="company-query">搜索公司</label>
+        <div class="search-controls">
+          <input type="search" id="company-query" name="q" autocomplete="off" maxlength="100" placeholder="输入代码或公司名称" aria-describedby="search-scope">
+          <button type="submit" class="solid-button">搜索</button>
+        </div>
+        <p id="search-scope">原型覆盖 AAPL、MSFT、NVDA、TSM，支持代码和中英文名称。</p>
+      </form>
+      <p id="search-status" class="minor" role="status"></p>
+      <ul id="search-results" aria-label="发行人候选" hidden></ul>
+    </section>
     <section class="opening" aria-labelledby="company-title">
-      <p class="company-meta">Apple Inc. <span>AAPL · Nasdaq · 美国</span></p>
-      <h1 id="company-title">Apple 2026 财年年报</h1>
-      <p class="intro">阅读合并财务事实、比较期变化和中文解释。</p>
-      <div class="report-line"><span id="report-period">正在读取已核验快照</span><span id="snapshot-label" class="source-state">本地阅读原型 · 非实时</span></div>
+      <p id="company-meta" class="company-meta"></p>
+      <h1 id="company-title">上市公司阅读器</h1>
+      <p id="company-intro" class="intro">从官方财报阅读经营表现，逐项核对原文。</p>
+      <div class="report-line">
+        <label for="report" class="report-picker">选择报告 <select id="report" disabled><option>正在读取报告</option></select></label>
+        <span id="snapshot-label" class="source-state">本地快照 · 非实时</span>
+      </div>
     </section>
     <nav class="section-nav" aria-label="阅读栏目">
-      <button type="button" data-section="overview" aria-current="page"><span>概览</span><small>从年报读起</small></button>
+      <button type="button" data-section="overview" aria-current="page"><span>概览</span><small>经营与收入</small></button>
       <button type="button" data-section="financials"><span>财报</span><small>数字与原文</small></button>
       <button type="button" data-section="announcements"><span>公告</span><small>披露覆盖</small></button>
       <button type="button" data-section="reporting"><span>报道</span><small>接入状态</small></button>
     </nav>
     <div id="loading" class="loading" role="status">正在校验本地证据与计算结果…</div>
     <section id="error" class="error-state" hidden aria-labelledby="error-title"><h2 id="error-title">暂时无法读取这份财报</h2><p id="error-description">获取失败，不代表公司未披露。请检查本地服务和证据快照后重试。</p><button type="button" id="retry" class="solid-button">重新读取</button></section>
-    <section id="overview" class="reading-layout" hidden aria-label="Apple 年报概览">
+    <section id="overview" class="reading-layout" hidden aria-label="经营概览">
       <article class="reading-copy">
-        <div class="section-heading"><span class="section-caption">年报解读</span><h2>经营表现与期末状况</h2></div>
-        <p class="reading-lead">收入、利润和现金流回答不同的问题。资产与负债则是一张期末快照，阅读时需要分开看。</p>
-        <div id="explanations" class="explanations"></div>
-        <div class="interpretation-note"><h3>解释到哪里为止</h3><p>以下内容只解释已经核验的数字与计算关系。没有替管理层推断原因，也不据此预测未来。</p><p class="minor">管理层声明尚未整理，不作为独立事实展示。</p></div>
+        <div class="section-heading"><h2>经营概览</h2></div>
+        <div id="business"></div>
+        <section class="reader-block" aria-labelledby="composition-title"><h3 id="composition-title">收入构成</h3><ul id="composition"></ul></section>
+        <section class="reader-block" aria-labelledby="changes-title"><h3 id="changes-title">变化与原文</h3><div id="management"></div><div id="explanations" class="explanations"></div></section>
       </article>
       <aside class="evidence-aside" aria-label="原文与关键数字">
-        <div class="aside-heading"><h2>关键指标</h2><span>FY2026</span></div>
+        <div class="aside-heading"><h2>关键指标</h2><span id="summary-period"></span></div>
         <div id="key-facts" class="key-facts"></div>
         <div id="source-summary" class="source-summary"></div>
       </aside>
     </section>
     <section id="financials" hidden aria-labelledby="financials-title">
-      <div class="financial-heading"><div><p class="section-caption">同一份 10-K 的本期与比较期</p><h2 id="financials-title">财务事实与原文</h2></div><label class="unit-select">显示单位<select id="unit"><option value="hundred_millions">亿美元</option><option value="millions">百万美元</option></select></label></div>
-      <p class="table-intro">本期与比较期均来自 2026 年报。全年流量与期末余额分别列示；同比使用 Decimal，保留两位小数。</p>
-      <div class="table-scroll" tabindex="0" aria-label="核心财务事实，可横向滚动"><table><caption id="facts-caption">Apple 核心财务事实</caption><thead><tr><th scope="col">指标与口径</th><th scope="col">FY2026</th><th scope="col">FY2025</th><th scope="col">同比</th><th scope="col">核对出处</th></tr></thead><tbody id="facts-table"></tbody></table></div>
-      <div class="calculation-section"><h3>计算是如何得到的</h3><p>同比 =（本期原值 ÷ 比较期原值 − 1）× 100。只有币种、倍率、期间、准则、范围和文档版本一致时才计算；零基期等情形会明确拒绝。</p><div id="calculation-detail"></div></div>
+      <div class="financial-heading"><div><h2 id="financials-title">财务事实与原文</h2></div><label class="unit-select">显示单位<select id="unit"><option value="hundred_millions">亿元</option><option value="millions">百万</option></select></label></div>
+      <p class="table-intro">本期与比较期沿用同份文件的口径。比较日期见各指标，单季与财年累计分开列示。</p>
+      <p id="financial-empty" hidden></p><div id="financial-table" class="table-scroll" tabindex="0" aria-label="核心财务事实，可横向滚动"><table><caption id="facts-caption">核心财务事实</caption><thead><tr><th scope="col">指标与口径</th><th scope="col">本期</th><th scope="col">比较期</th><th scope="col">同比</th><th scope="col">核对出处</th></tr></thead><tbody id="facts-table"></tbody></table></div>
+      <div class="calculation-section"><h3>计算是如何得到的</h3><p>同比 =（本期原值 ÷ 比较期原值 − 1）× 100。仅对通过口径校验的两期计算。</p><div id="calculation-detail"></div></div>
       <details class="context-details"><summary>报告期、单位与版本说明</summary><div id="report-context"></div></details>
     </section>
-    <section id="announcements" hidden aria-labelledby="announcements-title" class="coverage-section"><p class="section-caption">公告覆盖</p><h2 id="announcements-title">已核验披露</h2><p class="reading-lead">当前只核验一份正式年报。近 90 天重大公告尚未整理，不能把覆盖缺口当作“没有公告”。</p><div id="filing-record"></div><p class="coverage-state">覆盖状态：不完整。三年年报、四期季报和更多公司留待后续任务。</p></section>
-    <section id="reporting" hidden aria-labelledby="reporting-title" class="coverage-section"><p class="section-caption">报道接入</p><h2 id="reporting-title">报道接入状态</h2><p class="reading-lead">权威媒体使用许可仍待确认，当前没有启用报道采集，也没有用模拟文章填充页面。</p><p class="coverage-state">状态：使用许可待确认。媒体报道、公司声明与监管披露将分别标注。</p></section>
+    <section id="announcements" hidden aria-labelledby="announcements-title" class="coverage-section"><h2 id="announcements-title">已核验披露</h2><div id="filing-record"></div><p id="announcement-state" class="coverage-state"></p></section>
+    <section id="reporting" hidden aria-labelledby="reporting-title" class="coverage-section"><h2 id="reporting-title">报道接入状态</h2><p id="media-state" class="coverage-state"></p></section>
     <div class="reader-footer-note"><p id="provenance-mode">来源与核验时间正在加载</p><p>只组织和解释公开事实。不预测股价、不荐股、不评级，不提供买卖建议。</p></div>
   </main>
   <footer class="shell footer"><span>hiwd company</span><span>中文阅读，原文可追溯。</span></footer>
