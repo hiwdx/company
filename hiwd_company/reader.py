@@ -2,6 +2,7 @@
 from .catalog import issuers
 from .domain import CURRENCIES, EvidenceError, display_amount, number, validate_claim, yoy
 from .auto_facts import GROUPS
+from .semantics import semantic_description
 
 
 STATUS_LABELS = {
@@ -33,7 +34,10 @@ def read_model(dataset, divisor='100000000'):
         current, prior = slots.get((metric, 'current')), slots.get((metric, 'prior'))
         if current is None:
             continue
-        if metric == 'net_income' and current['concept'] == 'ProfitLoss':
+        if current.get('semantic'):
+            label = current.get('semantic_label') or label
+            meaning = semantic_description(current['semantic'], meaning)
+        elif metric == 'net_income' and current['concept'] == 'ProfitLoss':
             label = '合并净利润'
             meaning = '本期净利包含归属于母公司股东和非控股权益的利润。'
         calc, error = None, None

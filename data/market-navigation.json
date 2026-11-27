@@ -1,0 +1,210 @@
+[
+  {
+    "issuer_id": "issuer:tencent-holdings",
+    "name": "腾讯控股有限公司",
+    "label": "腾讯控股",
+    "aliases": [
+      "Tencent",
+      "Tencent Holdings",
+      "騰訊控股"
+    ],
+    "report_currency": "CNY",
+    "fiscal_year_end": "12-31",
+    "securities": [
+      {
+        "market": "HK",
+        "mic": "XHKG",
+        "exchange": "香港联交所",
+        "code": "00700",
+        "ticker": "00700.HK",
+        "isin": "KYG875721634",
+        "type": "港币柜台"
+      },
+      {
+        "market": "HK",
+        "mic": "XHKG",
+        "exchange": "香港联交所",
+        "code": "80700",
+        "ticker": "80700.HK",
+        "isin": null,
+        "type": "人民币柜台"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "reports",
+        "label": "腾讯投资者关系 · 财务报告",
+        "url": "https://www.tencent.com/investors/financial-reports/"
+      },
+      {
+        "kind": "announcements",
+        "label": "腾讯投资者关系 · 公告",
+        "url": "https://www.tencent.com/zh-cn/investors/announcements/"
+      }
+    ],
+    "example": {
+      "end": "2025-12-31",
+      "label": "2025 年度报告",
+      "observed_on": "2026-11-27"
+    }
+  },
+  {
+    "issuer_id": "issuer:alibaba-group",
+    "name": "阿里巴巴集团控股有限公司",
+    "label": "阿里巴巴",
+    "aliases": [
+      "Alibaba",
+      "Alibaba Group",
+      "阿里巴巴集團"
+    ],
+    "report_currency": "CNY",
+    "fiscal_year_end": "03-31",
+    "securities": [
+      {
+        "market": "HK",
+        "mic": "XHKG",
+        "exchange": "香港联交所",
+        "code": "09988",
+        "ticker": "09988.HK",
+        "isin": "KYG017191142",
+        "type": "港币柜台"
+      },
+      {
+        "market": "HK",
+        "mic": "XHKG",
+        "exchange": "香港联交所",
+        "code": "89988",
+        "ticker": "89988.HK",
+        "isin": null,
+        "type": "人民币柜台"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "reports",
+        "label": "阿里巴巴投资者关系 · 业绩与财报",
+        "url": "https://www.alibabagroup.com/en-US/ir-financial-reports-financial-results"
+      },
+      {
+        "kind": "announcements",
+        "label": "阿里巴巴投资者关系 · 证券公告",
+        "url": "https://www.alibabagroup.com/zh-HK/ir-filings-hkex"
+      }
+    ],
+    "example": {
+      "end": "2026-03-31",
+      "label": "FY2026 年度报告",
+      "observed_on": "2026-11-27"
+    }
+  },
+  {
+    "issuer_id": "issuer:kweichow-moutai",
+    "name": "贵州茅台酒股份有限公司",
+    "label": "贵州茅台",
+    "aliases": [
+      "Kweichow Moutai",
+      "貴州茅台",
+      "茅台"
+    ],
+    "report_currency": "CNY",
+    "fiscal_year_end": "12-31",
+    "securities": [
+      {
+        "market": "CN",
+        "mic": "XSHG",
+        "exchange": "上海证券交易所",
+        "code": "600519",
+        "ticker": "600519.SH",
+        "isin": "CNE0000018R8",
+        "type": "人民币普通股"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "announcements",
+        "label": "贵州茅台投资者关系 · 公司公告和财报",
+        "url": "https://www.moutaichina.com/mtgf/tzzgx/gsgg/index.html"
+      },
+      {
+        "kind": "exchange",
+        "label": "上海证券交易所首页",
+        "url": "https://www.sse.com.cn/"
+      },
+      {
+        "kind": "exchange",
+        "label": "巨潮资讯网首页",
+        "url": "https://www.cninfo.com.cn/"
+      }
+    ],
+    "example": {
+      "end": "2026-09-30",
+      "label": "2026 年第三季度报告",
+      "observed_on": "2026-11-27"
+    }
+  },
+  {
+    "issuer_id": "issuer:industrial-commercial-bank-cn",
+    "name": "中国工商银行股份有限公司",
+    "label": "工商银行",
+    "aliases": [
+      "ICBC",
+      "Industrial and Commercial Bank of China",
+      "中國工商銀行",
+      "工行"
+    ],
+    "report_currency": "CNY",
+    "fiscal_year_end": "12-31",
+    "securities": [
+      {
+        "market": "CN",
+        "mic": "XSHG",
+        "exchange": "上海证券交易所",
+        "code": "601398",
+        "ticker": "601398.SH",
+        "isin": null,
+        "type": "A 股"
+      },
+      {
+        "market": "HK",
+        "mic": "XHKG",
+        "exchange": "香港联交所",
+        "code": "01398",
+        "ticker": "01398.HK",
+        "isin": "CNE1000003G1",
+        "type": "H 股"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "reports",
+        "label": "工商银行 · 2026 年第三季度 A 股公告",
+        "url": "https://www.icbc-ltd.com/page/1289646772725837824.html"
+      },
+      {
+        "kind": "reports",
+        "label": "工商银行 · 2026 年第三季度 H 股公告",
+        "url": "https://www.icbc-ltd.com/page/1289647050443288576.html"
+      },
+      {
+        "kind": "reports",
+        "label": "工商银行投资者关系 · A/H 财务报告",
+        "url": "https://www.icbc-ltd.com/column/1438058343653851145.html"
+      },
+      {
+        "kind": "announcements",
+        "label": "工商银行投资者关系 · 公告",
+        "url": "https://www.icbc-ltd.com/page/721853001500491800.html"
+      },
+      {
+        "kind": "exchange",
+        "label": "上海证券交易所首页",
+        "url": "https://www.sse.com.cn/"
+      }
+    ],
+    "example": {
+      "end": "2026-09-30",
+      "label": "2026 年第三季度 A/H 报告",
+      "observed_on": "2026-11-27"
+    }
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "observed_on": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "base_pr": 8,
+  "local_tests": {
+    "phase_2a_branch_passed": 55,
+    "integration_shadow_tree_passed": 62,
+    "syntax_checks": ["compileall hiwd_company scripts", "node --check app/app.js", "sh -n scripts/start_local.sh"],
+    "synthetic_regressions": [
+      "partial amendment keeps the verified report",
+      "legacy automatic amendment is quarantined on upgrade",
+      "approved complete amendment requires a matching review against the unchanged original",
+      "semantic attestation preserves the original version",
+      "temporary failure can retry the same requested accession",
+      "a failed refresh preserves verified evidence without presenting it as a new verification",
+      "main-statement structure, tax basis, profit scope and bank concepts",
+      "A/H identity and source URL restrictions"
+    ]
+  },
+  "official_input_observations": {
+    "hk": {
+      "automatic": "no_go_authorization",
+      "manual_imported_reports": 0,
+      "application_document_requests": 0,
+      "browser_access": "public issuer report and announcement directories",
+      "hkexnews": "section 4 requires written consent for links including the homepage; section 5 restricts automated access and derived use. No link or access adapter in the product."
+    },
+    "cn": {
+      "automatic": "no_go_authorization",
+      "manual_imported_reports": 0,
+      "application_document_requests": 0,
+      "browser_access": "Moutai Q3 PDF text; ICBC A/H individual announcement pages; Shanghai legal notice",
+      "failed": ["ICBC A-share Q3 PDF: HTTP 403", "ICBC legal notice: HTTP 403", "SZSE legal text direct preview: timeout", "BSE legal text: official index only", "CNINFO authorized API service: no readable permission terms"]
+    },
+    "us": {
+      "status": "conditional_go_local_offline",
+      "official_cached_facts_matched": 40,
+      "applicable_current_metrics_verified": 20,
+      "applicable_current_metrics": 21,
+      "new_sec_requests": 0,
+      "evidence": "phase-2a-us.json"
+    }
+  },
+  "screenshots": {
+    "delivery": "local review archive",
+    "capture": "local running reader, no live SEC access",
+    "pages": [
+      {"file": "phase2a-desktop-hk-navigation.jpg", "viewport": [1440, 1000], "query": "00700.HK", "verified": "HKD counter, CNY report and official issuer links"},
+      {"file": "phase2a-desktop-hk-alibaba.jpg", "viewport": [1440, 1000], "query": "09988.HK", "verified": "CNY report, March year end and official issuer links"},
+      {"file": "phase2a-mobile-cn-navigation.jpg", "viewport": [390, 844], "query": "600519.SH", "verified": "CNY quarter-end report metadata and issuer and exchange links"},
+      {"file": "phase2a-mobile-ah-navigation.jpg", "viewport": [390, 844], "query": "01398.HK", "verified": "601398.SH and 01398.HK each select their respective security at the same issuer; both official announcement links are visible"},
+      {"file": "phase2a-desktop-us-semantics.jpg", "viewport": [1440, 1000], "query": "KO", "verified": "main statement labels, current and prior original-source links, unverified liabilities absent"}
+    ],
+    "additional_ui_check": "KO announcements distinguish verified SEC directory and its window from the content linked in each official original."
+  }
+}

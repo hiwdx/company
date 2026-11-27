@@ -24,7 +24,7 @@
           <input type="search" id="company-query" name="q" autocomplete="off" maxlength="100" placeholder="输入代码或公司名称" aria-describedby="search-scope">
           <button type="submit" class="solid-button">搜索</button>
         </div>
-        <p id="search-scope">输入证券代码或 SEC 目录中的公司名称。</p>
+        <p id="search-scope">输入公司名称或证券代码，例如 COST、00700.HK、601398.SH。</p>
       </form>
       <p id="search-status" class="minor" role="status"></p>
       <p id="directory-status" class="minor"></p>
@@ -44,12 +44,18 @@
         <p id="research-state" class="minor" role="status"></p>
       </div>
     </section>
-    <nav class="section-nav" aria-label="阅读栏目">
+    <nav id="reader-sections" class="section-nav" aria-label="阅读栏目">
       <button type="button" data-section="overview" aria-current="page"><span>概览</span><small>经营与收入</small></button>
       <button type="button" data-section="financials"><span>财报</span><small>数字与原文</small></button>
       <button type="button" data-section="announcements"><span>公告</span><small>披露覆盖</small></button>
       <button type="button" data-section="reporting"><span>报道</span><small>接入状态</small></button>
     </nav>
+    <section id="market-navigation" class="coverage-section" hidden aria-labelledby="market-title">
+      <h2 id="market-title">官方披露入口</h2>
+      <p id="market-coverage" class="coverage-state"></p>
+      <p id="market-date" class="minor"></p>
+      <ul id="market-links" class="market-links"></ul>
+    </section>
     <div id="loading" class="loading" role="status">正在校验本地证据与计算结果…</div>
     <section id="error" class="error-state" hidden aria-labelledby="error-title"><h2 id="error-title">暂时无法读取这份财报</h2><p id="error-description">读取失败。请检查本地证据后重试。</p><p id="error-source"></p><button type="button" id="retry" class="solid-button">重新读取</button></section>
     <section id="overview" class="reading-layout" hidden aria-label="经营概览">

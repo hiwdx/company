@@ -25,6 +25,8 @@ class InlineParser(HTMLParser):
         self.context = self.unit = None
         self.anchors, self.duplicate_anchors, self.metadata = set(), set(), []
         self.table_depth = self.hidden_depth = 0
+        self.visible_tables = []
+        self.table_stack = []
         self.non_numeric = None
         self.number_stack = []
         self.field = None
@@ -42,10 +44,22 @@ class InlineParser(HTMLParser):
             if attrs['id'] in self.anchors:
                 self.duplicate_anchors.add(attrs['id'])
             self.anchors.add(attrs['id'])
-        if tag == 'table':
-            self.table_depth += 1
         if tag in ('ix:hidden', 'ix:header'):
             self.hidden_depth += 1
+        if tag == 'table':
+            self.table_depth += 1
+            if not self.hidden_depth:
+                self.table_stack.append({'id': len(self.visible_tables), 'rows': [], 'row': None, 'cell': None})
+                self.visible_tables.append(self.table_stack[-1]['rows'])
+        if self.table_stack and not self.hidden_depth:
+            table = self.table_stack[-1]
+            if tag == 'tr':
+                table['row'] = {'label': ''}
+                table['rows'].append(table['row'])
+                if len(table['rows']) > 20000:
+                    raise EvidenceError('statement_table_limit')
+            elif tag in ('td', 'th') and table['row'] is not None and not table['row']['label']:
+                table['cell'] = ''
         if tag == 'ix:nonnumeric' and (attrs.get('name') or '').startswith('dei:'):
             self.non_numeric = {'attrs': attrs, 'text': ''}
         if tag == 'xbrli:context':
@@ -74,12 +88,19 @@ class InlineParser(HTMLParser):
             # iXBRL can validly nest equivalent facts for different contexts.
             if len(self.number_stack) >= 32:
                 raise EvidenceError('numeric_nesting_limit')
+            table = self.table_stack[-1] if self.table_stack and not self.hidden_depth else None
             self.number_stack.append({'attrs': attrs, 'text': '', 'in_table': self.table_depth > 0,
-                                      'hidden': self.hidden_depth > 0})
+                                      'hidden': self.hidden_depth > 0,
+                                      'row': table['row'] if table else None,
+                                      'table_id': table['id'] if table else None})
 
     def handle_data(self, data):
         if self.blocked_active_depth:
             return
+        if self.table_stack and not self.hidden_depth:
+            table = self.table_stack[-1]
+            if table['cell'] is not None and len(table['cell']) < 320:
+                table['cell'] += data[:320 - len(table['cell'])]
         if self.context is not None and self.field == 'xbrldi:explicitmember':
             self.context['members'][-1][1] += data
         elif self.context is not None and self.field:
@@ -97,8 +118,20 @@ class InlineParser(HTMLParser):
             return
         if self.blocked_active_depth:
             return
+        if self.table_stack and not self.hidden_depth:
+            table = self.table_stack[-1]
+            if tag in ('td', 'th') and table['row'] is not None and table['cell'] is not None:
+                label = ' '.join(table['cell'].split())
+                if any(char.isalpha() for char in label):
+                    table['row']['label'] = label
+                table['cell'] = None
+            elif tag == 'tr':
+                table['row'] = None
+                table['cell'] = None
         if tag == 'table':
             self.table_depth = max(0, self.table_depth - 1)
+            if self.table_stack and not self.hidden_depth:
+                self.table_stack.pop()
         if tag in ('ix:hidden', 'ix:header'):
             self.hidden_depth = max(0, self.hidden_depth - 1)
         if tag == self.field:

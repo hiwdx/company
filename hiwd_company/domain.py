@@ -81,7 +81,7 @@ def comparable(current, prior):
     verify_fact(current)
     verify_fact(prior)
     for key in ('metric', 'concept', 'currency', 'unit', 'scale', 'period_kind', 'accounting_standard',
-                'scope', 'version', 'source_url', 'cik', 'original_sha256'):
+                'scope', 'version', 'source_url', 'cik', 'original_sha256', 'semantic'):
         if current.get(key) != prior.get(key):
             raise EvidenceError('incomparable_' + key)
     as_of, prior_end = map(date.fromisoformat, (current['period_end'], prior['period_end']))

@@ -7,6 +7,7 @@ import hashlib
 from .domain import CURRENCIES, PERIOD_LIMITS, EvidenceError, evidence_url, number, verify_fact
 from .importer import METRICS, document_subject, normalized, parse_document
 from .sec import ACCESSION
+from .semantics import row_meaning, statement_types
 
 
 @dataclass(frozen=True)
@@ -57,6 +58,10 @@ class Candidate:
     currency: str
     start: date
     end: date
+    semantic: str
+    semantic_label: str
+    statement_type: str
+    source_row: str
 
     @property
     def anchor(self):
@@ -96,7 +101,9 @@ def fiscal_focus(parsed, cik):
     return next(iter(focus))
 
 
-def scan(parsed, cik, concepts, namespace):
+def scan(parsed, cik, concepts, namespace, metrics):
+    table_types = [statement_types(rows) for rows in parsed.visible_tables]
+    metric_for = {concept: metric.key for metric in metrics for concept in metric.gaap}
     for inline in parsed.facts:
         attrs = inline['attrs']
         prefix, _, concept = (attrs.get('name') or '').partition(':')
@@ -113,9 +120,14 @@ def scan(parsed, cik, concepts, namespace):
         start, end, instant = (ctx.get('xbrli:' + name) for name in ('startdate', 'enddate', 'instant'))
         if not ((start and end and not instant) or (instant and not start and not end)):
             continue
+        table = inline['table_id']
+        source_row = (inline.get('row') or {}).get('label', '')
+        meaning = row_meaning(metric_for[concept], concept, source_row, table_types[table]) if table is not None else None
+        if not meaning:
+            continue
         try:
             yield Candidate(inline, concept, currency, date.fromisoformat(start) if start else None,
-                            date.fromisoformat(end or instant))
+                            date.fromisoformat(end or instant), *meaning, source_row)
         except ValueError:
             continue
 
@@ -163,7 +175,7 @@ def select_group(rows, parsed, api):
         return None, 'no_candidate'
     choices = defaultdict(list)
     for row in rows:
-        choices[(row.concept, row.start, row.end)].append(row)
+        choices[(row.concept, row.start, row.end, row.semantic)].append(row)
     if len(choices) != 1:
         return None, 'ambiguous_concept_or_period'
     group = next(iter(choices.values()))
@@ -186,6 +198,7 @@ def select_group(rows, parsed, api):
 
 def choose_prior(rows, current, kind, form, focus):
     eligible = [row for row in rows if row.end < current.end and row.concept == current.concept
+                and row.semantic == current.semantic
                 and duration_allowed(row, kind, focus)]
     at_year = [row for row in eligible if 350 <= (current.end - row.end).days <= 371]
     if kind != 'instant':
@@ -209,6 +222,8 @@ def fact_payload(selected, doc, cik, metric, kind, slot):
         'scale': int(attrs['scale']), 'accounting_standard': doc['accounting_standard'], 'scope': 'consolidated',
         'version': doc['accession'], 'source_url': doc['original_url'], 'original_sha256': doc['original_sha256'],
         'context_id': attrs['contextref'], 'status': 'verified', 'verification': 'automatic_ixbrl_companyfacts_match',
+        'semantic': row.semantic, 'semantic_label': row.semantic_label, 'source_row': row.source_row,
+        'statement_type': row.statement_type,
     })
 
 
@@ -242,7 +257,7 @@ def extract(issuer, filing, html, companyfacts, *, observed_at, companyfacts_sha
     document_subject(parsed, doc, cik)
     focus = fiscal_focus(parsed, cik)
     concepts = supported_concepts(metrics, namespace)
-    candidates = list(scan(parsed, cik, concepts, namespace))
+    candidates = list(scan(parsed, cik, concepts, namespace, metrics))
     api = api_index(companyfacts, doc, namespace, concepts)
     # Visible original Assets columns are a reporting-currency signal independent
     # of currency names in a stock ticker or on an exchange. Dual native candidates fail closed.
@@ -279,6 +294,6 @@ def extract(issuer, filing, html, companyfacts, *, observed_at, companyfacts_sha
         outcomes.append({'metric': metric.key, 'label': metric.label, 'status': status, 'prior_status': prior_status})
     if not records:
         doc['verification_status'] = 'document_verified'
-    return {'schema_version': 3, 'dataset_kind': 'real_official_auto_verified', 'acquisition_mode': 'sec_on_demand',
+    return {'schema_version': 4, 'dataset_kind': 'real_official_auto_verified', 'acquisition_mode': 'sec_on_demand',
             'issuer': issuer, 'document': doc, 'facts': records, 'narrative': [], 'metric_outcomes': outcomes,
             'metric_profile': sector}
