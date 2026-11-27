@@ -13,13 +13,16 @@ const initial = new URL(location.href).searchParams;
 const currencyNames = {USD: '美元', TWD: '新台币'};
 let section = sections.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'overview';
 let cik = '', model = null, loadID = 0, searchID = 0;
-let currentIssuer = null, selectedTicker = null, researchInfo = null, reportList = [], lastAttempt = null;
+let navigationMode = false, currentIssuer = null, selectedTicker = null, researchInfo = null, reportList = [], lastAttempt = null;
 const sourceStatuses = {
   network_disabled: 'SEC 网络访问未开启', authorization_blocked: 'SEC 拒绝访问，本轮已停止',
   rate_limited: 'SEC 限流，本轮已停止', fetch_failed: 'SEC 请求失败',
   wrong_mime: 'SEC 返回了不支持的格式', error_document: 'SEC 返回了错误页面',
   no_periodic_filing_in_window: '时间窗内未找到定期报告',
   source_validation_failed: 'SEC 目录资料未通过校验',
+  needs_semantic_review: '这份缓存需按新的主报表口径重新核验。',
+  revision_pending: '修订件等待独立审核。现有已核验报告保留。',
+
   unsupported_filing_form: '该表单已找到，自动财务提取暂未支持',
   partial_history_latest_unproven: '历史目录存在缺口，无法确认最新报告',
   evidence_rejected: '原文或数据核验未通过', source_unavailable: 'SEC 来源暂不可用',
@@ -63,6 +66,8 @@ function showSection(next, focus = false) {
   const url = new URL(location.href);
   url.hash = section;
   if (model) {
+    url.searchParams.delete('issuer');
+    url.searchParams.delete('security');
     url.searchParams.set('cik', model.issuer.cik);
     url.searchParams.set('report', model.document.accession);
   }
@@ -135,6 +140,18 @@ function displayError(error) {
   $('snapshot-label').textContent = '财务数字待核验';
   const target = reportList.find(report => report.accession === $('report').value);
   if (target?.original_url) $('error-source').append(sourceLink('打开 SEC 官方原文', target, cik, target.accession));
+  const fallback = researchInfo?.report?.last_verified;
+  if (fallback && (fallback.accession !== target?.accession ||
+      ['blocked','retryable_failure'].includes(researchInfo?.report?.status))) {
+    const previous = el('a', '', '读取上次核验报告 · ' + fallback.report_end);
+    const url = new URL(location.href);
+    url.searchParams.set('cik', cik);
+    url.searchParams.set('report', fallback.accession);
+    url.searchParams.set('proof', 'last');
+    url.hash = 'financials';
+    previous.href = url.href;
+    $('error-source').append(' · ', previous);
+  }
   showSection(section);
 }
 
@@ -152,6 +169,10 @@ function displaySecurities(issuer) {
 }
 
 function selectIssuer(issuer, accession, official = false) {
+  navigationMode = false;
+  $('market-navigation').hidden = true;
+  $('reader-sections').hidden = false;
+  $('report').parentElement.hidden = false;
   cik = issuer.cik;
   currentIssuer = issuer;
   selectedTicker = issuer.matched_tickers?.[0] || null;
@@ -167,6 +188,55 @@ function selectIssuer(issuer, accession, official = false) {
   $('report').disabled = true;
   if (official) startResearch(accession);
   else loadReports(accession);
+}
+
+const marketHosts = new Set(['www.tencent.com', 'www.alibabagroup.com', 'www.moutaichina.com',
+  'www.icbc-ltd.com', 'www.sse.com.cn', 'www.cninfo.com.cn',
+  'www.szse.cn', 'www.bse.cn']);
+function selectNavigation(issuer) {
+  beginLoad();
+  navigationMode = true;
+  cik = '';
+  researchInfo = null;
+  currentIssuer = null;
+  selectedTicker = issuer.matched_tickers?.[0] || null;
+  $('search-results').hidden = true;
+  $('company-title').textContent = issuer.label;
+  $('company-meta').textContent = issuer.name;
+  displaySecurities(issuer);
+  $('report').disabled = true;
+  $('report').parentElement.hidden = true;
+  $('reader-sections').hidden = true;
+  $('research-action').hidden = true;
+  $('research-state').textContent = '';
+  $('snapshot-label').textContent = '官方原文导航';
+  $('market-coverage').textContent = '自动接入待授权。可前往官方站点阅读财报和公告。';
+  const date = issuer.example;
+  $('market-date').textContent = '已核对入口 · ' + date.label + ' · 报告期末 ' + date.end +
+    ' · 报告币种 ' + issuer.report_currency + ' · 财年结束 ' + issuer.fiscal_year_end;
+  const links = $('market-links');
+  links.replaceChildren();
+  for (const source of issuer.sources) {
+    const url = new URL(source.url);
+    if (url.protocol !== 'https:' || !marketHosts.has(url.hostname) || url.port || url.username || url.password) continue;
+    const item = el('li'), anchor = el('a', '', source.label);
+    anchor.href = url.href;
+    anchor.target = '_blank';
+    anchor.rel = 'noopener noreferrer';
+    item.append(anchor);
+    links.append(item);
+  }
+  $('market-navigation').hidden = false;
+  $('loading').hidden = true;
+  $('provenance-mode').textContent = '官方入口核对日 ' + date.observed_on;
+  const url = new URL(location.href);
+  url.searchParams.delete('cik');
+  url.searchParams.delete('report');
+  url.searchParams.set('issuer', issuer.issuer_id);
+  if (selectedTicker) url.searchParams.set('security', selectedTicker);
+  else url.searchParams.delete('security');
+  url.hash = '';
+  history.replaceState(null, '', url);
 }
 
 async function findCompanies(event) {
@@ -186,7 +256,7 @@ async function findCompanies(event) {
     if (lookupID !== searchID) return;
     $('directory-status').textContent = data.directory
       ? ('SEC 目录 · ' + data.directory.date + (data.directory.cache === 'stale' ? ' · 缓存已过期' : ''))
-      : '当前只查询可用的本地审阅样本。';
+      : data.scope === 'reviewed_market_navigation' ? '港股 / A 股样本 · 官方入口' : '当前只查询可用的本地审阅样本。';
     if (!data.candidates.length) {
       $('search-status').textContent = data.status === 'source_unavailable'
         ? (sourceStatuses[data.reason] || 'SEC 目录暂不可用。')
@@ -201,7 +271,8 @@ async function findCompanies(event) {
       button.addEventListener('click', () => {
         $('company-query').value = issuer.matched_tickers[0] || issuer.securities[0].ticker;
         $('search-status').textContent = '';
-        selectIssuer(issuer, null, data.scope === 'sec_directory');
+        if (issuer.kind === 'market_navigation') selectNavigation(issuer);
+        else selectIssuer(issuer, null, data.scope === 'sec_directory');
         $('company-title').tabIndex = -1;
         $('company-title').focus({preventScroll: true});
       });
@@ -232,7 +303,9 @@ function refreshReportOptions(reports, accession) {
   reportList = reports;
   const select = $('report');
   select.replaceChildren(...reports.map(entry => {
-    const status = entry.status === 'discovered' ? ' · 待提取' : '';
+    const labels = {discovered: ' · 待提取', revision_pending: ' · 修订待审',
+      needs_semantic_review: ' · 待重新核验'};
+    const status = labels[entry.status] || '';
     const option = el('option', '', entry.form + ' · ' + entry.label + status);
     option.value = entry.accession;
     return option;
@@ -265,7 +338,10 @@ function researchSummary(info) {
   const freshness = info.freshness === 'stale' ? '缓存已过期' : 'SEC 目录';
   const gap = info.history_window?.complete ? '' : ' · 历史窗部分可核验';
   const fallback = info.index_refresh_status ? ' · ' + (sourceStatuses[info.index_refresh_status] || '更新失败') : '';
-  $('research-state').textContent = '来源截至 ' + info.source_cutoff + '（美东） · ' + freshness + gap + fallback;
+  const amendment = info.listed_latest_accession && info.listed_latest_accession !== info.latest_accession
+    ? ' · 最新修订待审' : '';
+  $('research-state').textContent = '来源截至 ' + info.source_cutoff + '（美东） · ' +
+    freshness + gap + fallback + amendment;
 }
 
 async function waitForResearch(cikValue, accession, id) {
@@ -304,8 +380,13 @@ async function startResearch(accession) {
     if (id !== loadID) return;
     refreshReportOptions(list.reports, desired);
     renderAnnouncements();
-    if (!desired || (desired === result.selected_accession && result.verification === 'evidence_rejected'))
-      throw Error(result.verification);
+    if (!desired || (desired === result.selected_accession &&
+        ['evidence_rejected', 'revision_pending', 'source_unavailable'].includes(result.verification))) {
+      const impact = result.report?.candidate?.impact;
+      if (impact) $('research-state').textContent += ' · 修订候选：' +
+        impact.missing.length + ' 项原证据缺失，' + impact.changed.length + ' 项变更';
+      throw Error(result.verification === 'source_unavailable' ? (result.diagnostic || result.verification) : result.verification);
+    }
     if (!result.fetched_accessions.includes(desired)) throw Error(result.verification === 'source_unavailable'
       ? (result.diagnostic || result.verification) : result.verification);
     const data = await request('/api/reader', {cik: target, accession: desired, unit: $('unit').value});
@@ -432,7 +513,7 @@ function renderRows(data, link) {
     now.append(el('small', '', fact.period_end));
     if (row.prior) prior.append(el('small', '', row.prior.period_end));
     const reference = el('td');
-    reference.append(link('本期原文', fact), el('small', '', row.statement));
+    reference.append(link('本期原文', fact), el('small', '', fact.source_row || row.statement));
     if (row.prior) reference.append(link('比较期原文', row.prior));
     tr.append(title, now, prior, el('td', '', row.yoy ? row.yoy.value + '%' : '暂不计算'), reference);
     table.append(tr);
@@ -450,7 +531,8 @@ function renderAnnouncements() {
   const current = researchInfo?.announcements;
   if (!current) return;
   const state = current.state === 'observed' ? 'SEC 目录覆盖此窗口' : '覆盖不完整';
-  $('announcement-state').textContent = current.start + ' 至 ' + current.end + '（美东申报日） · ' + state;
+  $('announcement-state').textContent = current.start + ' 至 ' + current.end + '（美东申报日） · ' + state +
+    '。事项名称来自 SEC 目录，正文请查看原文。';
   const list = $('filing-record');
   list.replaceChildren();
   if (!current.entries.length) {
@@ -475,7 +557,8 @@ async function readSelected() {
   if ($('report').disabled) return cik ? startResearch() : initialize();
   const accession = $('report').value;
   const report = reportList.find(item => item.accession === accession);
-  if (report?.status === 'discovered') return startResearch(accession);
+  if (report && ['discovered', 'revision_pending', 'needs_semantic_review'].includes(report.status))
+    return startResearch(accession);
   const id = beginLoad();
   try {
     const data = await request('/api/reader', {cik, accession, unit: $('unit').value});
@@ -488,28 +571,43 @@ async function readSelected() {
 }
 $('report').addEventListener('change', readSelected);
 $('unit').addEventListener('change', readSelected);
-$('retry').addEventListener('click', readSelected);
+$('retry').addEventListener('click', () => {
+  const last = researchInfo?.report;
+  if (last && ['retryable_failure', 'blocked', 'rejected'].includes(last.status))
+    startResearch(last.requested_accession);
+  else readSelected();
+});
 $('research-action').addEventListener('click', () => startResearch());
 
 async function initialize() {
   try {
+    const marketIssuer = initial.get('issuer');
+    if (marketIssuer) {
+      const issuer = await request('/api/navigation', {issuer: marketIssuer});
+      if (!cik && !navigationMode)
+        selectNavigation({...issuer, matched_tickers: initial.get('security') ? [initial.get('security')] : []});
+      return;
+    }
     const initialCik = initial.get('cik');
     if (initialCik) {
       const saved = await request('/api/research', {cik: initialCik});
-      if (!cik && saved.issuer) {
+      if (!cik && !navigationMode && saved.issuer) {
         selectIssuer(saved.issuer, initial.get('report'), false);
         researchInfo = saved;
         $('research-action').hidden = false;
         researchSummary(saved);
+        if (initial.get('proof') === 'last' && saved.report?.last_verified)
+          $('research-state').textContent += ' · 上次财报核验 ' +
+            (saved.report.last_verified.verified_at || saved.observed_at).slice(0, 10);
         renderAnnouncements();
         return;
       }
     }
     const params = initialCik ? {cik: initialCik} : {};
     const data = await request('/api/reader', params);
-    if (!cik) selectIssuer(data.issuer, initial.get('report'));
+    if (!cik && !navigationMode) selectIssuer(data.issuer, initial.get('report'));
   } catch (error) {
-    if (cik) return;
+    if (cik || navigationMode) return;
     $('loading').hidden = true;
     $('company-query').focus();
     displayError(error);

@@ -26,7 +26,20 @@ def main():
     imp.add_argument('--attachment', type=Path, action='append', default=[])
     imp.add_argument('--supersedes', nargs=2, metavar=('ACCESSION', 'SHA256'))
     imp.add_argument('--db', default=str(ROOT / 'local-results/manual.sqlite'))
+    revision = commands.add_parser('review-revision', help='本地查看修订影响或提交经审核的意见')
+    revision.add_argument('--research-cache', required=True)
+    revision.add_argument('--cik', required=True)
+    revision.add_argument('--accession', required=True)
+    revision.add_argument('--sha', required=True)
+    revision.add_argument('--decision', type=Path, help='经审核的完整修订影响 JSON')
     args = parser.parse_args()
+    if args.command == 'review-revision':
+        store = Store(args.research_cache + '.reports.sqlite')
+        key = (args.cik, args.accession, args.sha)
+        result = (store.publish_revision(*key, json.loads(args.decision.read_text(encoding='utf-8')))
+                  if args.decision else store.revision_review(*key))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
     store = Store(args.db)
     if args.command == 'import-original':
         snapshot = json.loads(args.snapshot.read_text(encoding='utf-8'))

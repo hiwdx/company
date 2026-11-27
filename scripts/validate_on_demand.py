@@ -32,7 +32,7 @@ def main():
             result = research.run(issuer['cik'])
             report = research.store.read(issuer['cik'], result.get('selected_accession')) if result.get('selected_accession') else None
             result['query'] = query
-            if report:
+            if report and result['verification'] in ('financials_verified', 'document_verified'):
                 model = read_model(report)
                 result['facts'] = report['facts']
                 result['model_row_count'] = len(model['rows'])

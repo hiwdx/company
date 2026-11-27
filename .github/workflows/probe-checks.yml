@@ -2,7 +2,7 @@ name: Phase 0 offline probe checks
 on:
   pull_request:
   push:
-    branches: [research/phase-0-data-feasibility]
+    branches: [main, research/phase-0-data-feasibility]
 permissions:
   contents: read
 jobs:

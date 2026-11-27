@@ -43,8 +43,10 @@ def financial_document(extra='', metadata_cik=CIK):
       <xbrli:period><xbrli:instant>{END}</xbrli:instant></xbrli:period></xbrli:context>
       <xbrli:unit id="usd"><xbrli:measure>iso4217:USD</xbrli:measure></xbrli:unit>
     </ix:resources></ix:header>
-    <table><tr><td><ix:nonFraction id="portable-asset" name="us-gaap:Assets" contextRef="end" unitRef="usd" scale="6" format="ixt:num-dot-decimal">930</ix:nonFraction></td></tr>
-      <tr><td><ix:nonFraction id="portable-sale" name="us-gaap:Revenues" contextRef="year" unitRef="usd" scale="6" format="ixt:num-dot-decimal">615</ix:nonFraction>{extra}</td></tr>
+    <table><tr><th>Total assets</th><td><ix:nonFraction id="portable-asset" name="us-gaap:Assets" contextRef="end" unitRef="usd" scale="6" format="ixt:num-dot-decimal">930</ix:nonFraction></td></tr>
+      <tr><th>Total liabilities and equity</th><td>930</td></tr></table>
+    <table><tr><th>Revenues</th><td><ix:nonFraction id="portable-sale" name="us-gaap:Revenues" contextRef="year" unitRef="usd" scale="6" format="ixt:num-dot-decimal">615</ix:nonFraction>{extra}</td></tr>
+      <tr><th>Income tax expense</th><td>30</td></tr><tr><th>Net income</th><td>160</td></tr>
     </table></html>''').encode()
 
 

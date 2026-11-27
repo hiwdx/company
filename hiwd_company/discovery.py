@@ -222,7 +222,10 @@ class Research:
                 return {'status': 'pending'}
             if saved and self.is_fresh(saved):
                 target = accession or saved['latest_accession']
-                if not target or target == saved.get('selected_accession') or target in saved['fetched_accessions']:
+                report = saved.get('report', {})
+                if (report.get('requested_accession') == target
+                        and report.get('status') in ('verified', 'document_only', 'unsupported', 'revision_pending', 'no_filing')
+                        and self.clock() - datetime.fromisoformat(report['checked_at']) < RESULT_TTL):
                     return saved
             # One issuer at a time avoids a burst or an unbounded queue.
             if any(not task.done() for task in self.tasks.values()):
@@ -264,56 +267,93 @@ class Research:
         window = collect_window(index, cik, cutoff.isoformat(), (cutoff - timedelta(days=HISTORY_DAYS - 1)).isoformat(),
                                 read_history)
         historical, rows = periodic_filings(window, cik)
+        listed_latest = historical[0] if historical else None
+        selected_default = listed_latest
+        if listed_latest and listed_latest['is_amendment']:
+            active = next((item for item in self.store.reports(cik)
+                           if item['accession'] == listed_latest['accession'] and item['status'] == 'financials_verified'), None)
+            if not active and listed_latest.get('base_accession'):
+                selected_default = next(item for item in historical if item['accession'] == listed_latest['base_accession'])
         result = {'status': 'complete', 'issuer': issuer, 'observed_at': index_receipt['observed_at'],
                   'source_cutoff': cutoff.isoformat(), 'history': historical, 'directory_date': observed_cutoff(directory_receipt).isoformat(),
                   'history_window': {key: value for key, value in window.items() if key != 'rows'},
                   'announcements': announcement_window(window, cik), 'freshness': index_receipt['cache'],
-                  'fetched_accessions': [], 'latest_accession': historical[0]['accession'] if historical else None,
+                  'fetched_accessions': [],
+                  'latest_accession': selected_default['accession'] if selected_default else None,
+                  'listed_latest_accession': listed_latest['accession'] if listed_latest else None,
+                  'directory_status': ('stale' if index_receipt['cache'] == 'stale' else
+                                       'observed' if window['complete'] else 'partial'),
                   'verification': 'no_periodic_filing_in_window',
                   'index_refresh_status': index_receipt.get('refresh_status'),
                   'receipts': {'directory': directory_receipt, 'submissions': index_receipt}}
         existing = self.store.reports(cik)
         if index_receipt['cache'] == 'stale':
             result['status'] = 'stale'
-        chosen = next((row for row in rows if row['accessionNumber'] == accession), None) if accession else (rows[0] if rows else None)
+        target = accession or result['latest_accession']
+        checked_at = self.clock().isoformat()
+        result['report'] = {'requested_accession': target, 'checked_at': checked_at, 'status': 'no_filing'}
+        chosen = next((row for row in rows if row['accessionNumber'] == target), None)
         if accession and chosen is None:
             raise EvidenceError('filing_not_found_in_official_window')
         if chosen:
             record = next(row for row in historical if row['accession'] == chosen['accessionNumber'])
             if not window['complete'] and not accession and chosen['filingDate'] < window['recent_from']:
                 result['verification'] = 'partial_history_latest_unproven'
+                result['report']['status'] = 'partial_history'
             elif record['form'].removesuffix('/A') not in ('10-K', '10-Q'):
                 result['verification'] = 'unsupported_filing_form'
+                result['report']['status'] = 'unsupported'
             else:
                 self.materialize(issuer, chosen, record, result, existing)
-        result['fetched_accessions'] = [r['accession'] for r in self.store.reports(cik)]
+        durable = [r for r in self.store.reports(cik) if r['status'] in ('financials_verified', 'document_verified')]
+        result['fetched_accessions'] = [r['accession'] for r in durable]
+        result['report']['last_verified'] = next((item for item in durable if item['status'] == 'financials_verified'), None)
         self.cache.save_report(cik, result)
         return result
 
     def materialize(self, issuer, chosen, record, result, existing):
         cik, url = issuer['cik'], record['original_url']
+        result['selected_accession'] = record['accession']
+        attempt = result['report']
+        active = next((item for item in existing if item['accession'] == record['accession']
+                       and item['status'] == 'financials_verified'), None)
+        if record['is_amendment'] and active:
+            result['verification'] = 'financials_verified'
+            attempt.update(status='verified', evidence=active)
+            return
         try:
             facts, facts_receipt = self.source.fetch(f'{DATA}/api/xbrl/companyfacts/CIK{cik}.json')
             raw, original = self.source.fetch(url, 'html', ttl=ORIGINAL_TTL)
             result['receipts'].update(companyfacts=facts_receipt, original=original)
             payload = parse_in_worker(issuer, chosen, raw, facts, observed_at=original['observed_at'],
                                       companyfacts_sha256=facts_receipt['sha256'])
+            if record['is_amendment']:
+                attempt.update(status='revision_pending', candidate=self.store.stage_revision(payload))
+                result['verification'] = 'revision_pending'
+                return
             previous = next((item for item in existing if item['report_end'] == record['report_end']
                              and item['form'].removesuffix('/A') == record['form'].removesuffix('/A')), None)
-            if previous and previous['accession'] == record['accession'] and previous['sha256'] == original['sha256']:
-                stored = self.store.read(cik, previous['accession'], previous['sha256'])
-                if stored['facts'] != payload['facts']:
-                    raise EvidenceError('immutable_evidence_conflict')
-            elif previous:
-                if not record['is_amendment'] or not payload['facts']:
+            if previous:
+                if previous['accession'] != record['accession'] or previous['sha256'] != original['sha256']:
                     raise EvidenceError('source_version_requires_review')
-                self.store.put(payload, supersedes=(previous['accession'], previous['sha256']))
+                stored = self.store.read(cik, previous['accession'], previous['sha256'])
+                if stored.get('schema_version') == 3:
+                    self.store.attest(payload)
+                elif stored['facts'] != payload['facts']:
+                    raise EvidenceError('immutable_evidence_conflict')
             else:
                 self.store.put(payload)
             result['verification'] = payload['document']['verification_status']
             result['metric_outcomes'] = payload['metric_outcomes']
-            result['selected_accession'] = record['accession']
+            attempt.update(status='verified' if payload['facts'] else 'document_only',
+                           evidence=self.store.report_record(payload))
+        except SourceUnavailable as exc:
+            reason = str(exc)
+            attempt.update(status='blocked' if reason in ('network_disabled', 'authorization_blocked', 'rate_limited')
+                           else 'retryable_failure', reason=reason)
+            result['verification'] = 'source_unavailable'
+            result['diagnostic'] = reason
         except (ValueError, KeyError, TypeError, AttributeError) as exc:
-            result['verification'] = 'source_unavailable' if isinstance(exc, SourceUnavailable) else 'evidence_rejected'
+            result['verification'] = 'revision_pending' if record['is_amendment'] else 'evidence_rejected'
+            attempt.update(status='revision_pending' if record['is_amendment'] else 'rejected', reason=str(exc))
             result['diagnostic'] = str(exc)
-            result['selected_accession'] = record['accession']

@@ -8,6 +8,7 @@ from .catalog import CIK, issuers, search
 from .discovery import SourceUnavailable
 from .domain import ACCESSION, SHA, EvidenceError
 from .reader import read_model
+from .market_navigation import market_issuers, search_market
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +30,8 @@ def list_reports(store, research, cik):
     rows = []
     for item in result['history']:
         accession = item['accession']
-        prepared = verified.get(accession) or baseline.get(accession) or {'status': 'discovered'}
+        state = 'revision_pending' if item['is_amendment'] else 'discovered'
+        prepared = verified.get(accession) or baseline.get(accession) or {'status': state}
         rows.append({'label': item['report_end'], **prepared, **item})
     seen = {item['accession'] for item in rows}
     return rows + [item for item in local if item['accession'] not in seen]
@@ -38,6 +40,7 @@ def list_reports(store, research, cik):
 def handler_for(store, research=None):
     catalog = issuers()
     supported = {issuer['cik'] for issuer in catalog}
+    navigation = market_issuers()
 
     class Handler(BaseHTTPRequestHandler):
         server_version = 'hiwd-company-local'
@@ -102,6 +105,9 @@ def handler_for(store, research=None):
             return self.send_body(status, json.dumps(payload, ensure_ascii=False).encode())
 
         def search_issuers(self, query):
+            market = search_market(query, navigation)
+            if market:
+                return {'status': 'ok', 'scope': 'reviewed_market_navigation', 'candidates': market}
             local = search(query, catalog)
             if research is None or not query.strip():
                 return {'status': 'ok' if local else 'unsupported', 'scope': 'reviewed_sample_catalog', 'candidates': local}
@@ -127,6 +133,11 @@ def handler_for(store, research=None):
                 if set(params) - {'q'} or len(params.get('q', '')) > 100:
                     return self.respond(400, {'status': 'invalid_query'})
                 return self.respond(200, self.search_issuers(params.get('q', '')))
+            if path.path == '/api/navigation':
+                if set(params) != {'issuer'}:
+                    return self.respond(400, {'status': 'invalid_query'})
+                match = next((issuer for issuer in navigation if issuer['issuer_id'] == params['issuer']), None)
+                return self.respond(200, match) if match else self.respond(404, {'status': 'not_found'})
             if path.path not in ('/api/reports', '/api/reader', '/api/research'):
                 return self.respond(404, {'status': 'not_found'})
             allowed = {'cik', 'accession', 'version', 'unit'} if path.path == '/api/reader' else {'cik'}
@@ -147,6 +158,10 @@ def handler_for(store, research=None):
                 return self.respond(400, {'status': 'invalid_query'})
             try:
                 data = research.store.read(cik, accession, version) if research and cik else None
+                if data and data.get('schema_version') == 3:
+                    data = None
+                    if accession:
+                        return self.respond(409, {'status': 'needs_semantic_review'})
                 if data is None:
                     data = store.read(cik, accession, version)
                 if data is None:
