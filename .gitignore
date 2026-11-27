@@ -3,9 +3,11 @@
 !.env.example
 *.key
 *.pem
+work/
 __pycache__/
 .venv/
-work/
 local-results/
+*.sqlite*
+*.pdf
 node_modules/
 .DS_Store

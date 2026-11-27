@@ -1,0 +1,29 @@
+{
+  "verified_on": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "local_tests": {
+    "command": "python3 -m unittest discover -s tests -v",
+    "passed": 26,
+    "failed": 0,
+    "network_scope": "loopback only"
+  },
+  "manual_replay": {
+    "status": "imported",
+    "mode": "manual_import",
+    "facts": 12,
+    "live_api_success": false
+  },
+  "browser": {
+    "desktop_viewport_css_pixels": [1440, 1000],
+    "mobile_viewport_css_pixels": [390, 844],
+    "mobile_document_width_css_pixels": 390,
+    "checked": [
+      "All four reader sections",
+      "Light and dark themes",
+      "Switch between 100 million and one million US dollar units",
+      "Overview metric links to the financial statement row",
+      "Current and prior period official source links",
+      "Mobile layout without horizontal document overflow"
+    ]
+  }
+}

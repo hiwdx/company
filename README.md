@@ -1,11 +1,17 @@
 # hiwd company
 
-hiwd company 是上市公司公开信息阅读器，面向美股、港股、A 股，中文通俗解读，原文可追溯。
+面向上市公司公开信息的中文阅读器。当前原型覆盖 Apple 2026 财年 10-K、六项财务指标和两期数据。计划中的目标域名为 `company.hiwd.com`。
 
-不预测股价、不荐股、不评级、不提供买卖建议，不做行情、交易或社区。
+使用 Python 3.9+ 和标准库。打开项目根目录，在本机运行：
 
-当前阶段：Phase 0 数据源可行性验证。产品范围与验收以 [Issue #1](https://github.com/hiwdx/company/issues/1) 为准；技术方案需通过 PR 审核。目标域名 `company.hiwd.com`，尚未部署。
+```sh
+python3 -m hiwd_company serve --port 18765
+```
 
-调研入口：[Phase 0 报告](docs/phase-0.md)、[复现说明](docs/reproduce.md)、[候选数据合约](docs/data-contract.md)。
+浏览器访问 `http://127.0.0.1:18765/`。首次启动会将版本化事实快照写入 `local-results/reader.sqlite`。可切换概览、财报、公告和报道。财报提供金额单位切换、比较期、同比公式和每个数字的原文链接。
 
-当前结论：**CONDITIONAL GO**。腾讯 CLI 已做六样本只读实测，但权威原文、币种语义及后台使用授权不足；SEC 本环境 403，HKEX 自动化使用存在许可门槛，巨潮授权与跨地区验证未完成。详情见报告，不将探针退出成功视为数据验收通过。
+- [原文对账、复现与当前覆盖](docs/phase-1.md)
+- [hiwd.com UI 实测和设计继承](docs/brand-ui.md)
+- [Issue #3 验收范围](https://github.com/hiwdx/company/issues/3)
+
+原型面向本人本地验证。正式站点、账号体系、付费模型、数据轮询均未启用。保持公开仓库无联系人、凭据及完整的上游原文。

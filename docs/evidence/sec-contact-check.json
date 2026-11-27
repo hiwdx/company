@@ -1,0 +1,15 @@
+{
+  "at": "2026-11-27T08:55:22.169229+00:00",
+  "project": "hiwd company",
+  "contact_authorized_by_po": true,
+  "contact_redacted": true,
+  "user_agent_template": "hiwd company/0.1 (research; contact: [PO-authorized email, omitted])",
+  "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+  "curl_exit": 0,
+  "http_status": 200,
+  "mime": "application/json",
+  "bytes": 164647,
+  "sha256": "7c22869dc335882f64cbdecced78135474ba31bdcc9e0ebfdffb1c0b0ba0d3b6",
+  "environment": "local macOS arm64; egress region not verified",
+  "followup": "stop on denial; no alternate identity/IP/proxy; manual offline prototype is a separate path"
+}
