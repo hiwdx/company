@@ -1,5 +1,8 @@
 name: Company reader offline checks
-on: [pull_request]
+on:
+  pull_request:
+  push:
+    branches: [main]
 permissions:
   contents: read
 jobs:
@@ -16,3 +19,4 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: python -m compileall -q hiwd_company scripts
       - run: node --check app/app.js
+      - run: sh -n scripts/start_local.sh

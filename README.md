@@ -10,6 +10,8 @@ sh scripts/start_local.sh
 
 打开 [本地阅读器](http://127.0.0.1:18768/) 搜索证券代码或公司名称。可试 `AAPL`、`TSM`、`00700.HK`、`09988.HK`、`600519.SH`、`601398.SH` 和 `01398.HK`。默认仅监听本机，使用已有的已审阅快照。新发行人研究需要已有的合规 SEC 缓存或经授权的本地访问。
 
+- [v0.1.0-alpha Mac 试用、覆盖范围和反馈](docs/v0.1.0-alpha.md)
+- [Phase 0 技术与品牌调研](docs/phase-0.md) · [复现](docs/reproduce.md) · [数据合约](docs/data-contract.md)
 - [Phase 2A 市场结论、美股回归和重现步骤](docs/phase-2a.md)
 - [港股及 A 股许可与四样本矩阵](docs/phase-2a-sources.md)
 - [整合顺序及下一阶段语义核验方案](docs/phase-2a-integration.md)

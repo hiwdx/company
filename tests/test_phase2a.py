@@ -1,8 +1,15 @@
 """Regressions for amendment isolation, report retries and statement semantics."""
 from copy import deepcopy
 from datetime import datetime, timezone
+from hashlib import sha256
+from http.client import HTTPConnection
+from http.server import ThreadingHTTPServer
+import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
+from threading import Thread
 import unittest
 from unittest.mock import patch
 
@@ -10,8 +17,9 @@ from hiwd_company.discovery import Research, SourceUnavailable
 from hiwd_company.domain import EvidenceError, comparable
 from hiwd_company.market_navigation import market_issuers, navigation_url, search_market
 from hiwd_company.semantics import row_meaning, statement_types
+from hiwd_company.server import handler_for
 from hiwd_company.store import Store
-from test_on_demand import ACC, CIK, ISSUER, STAMP, extracted, financial_document
+from test_on_demand import ACC, CIK, FILING, ISSUER, STAMP, arrays, extracted, financial_document
 
 
 def amend(data, *, partial=False):
@@ -93,6 +101,93 @@ class Amendments(unittest.TestCase):
             self.assertEqual(store.attest(new), 'attested')
             self.assertEqual(store.read(CIK)['schema_version'], 4)
             self.assertEqual(store.read(CIK)['document']['original_sha256'], old['document']['original_sha256'])
+
+
+class PublicAmendmentEntrypoints(unittest.TestCase):
+    def test_import_cli_supersedes_cannot_publish_partial_amendment(self):
+        with tempfile.TemporaryDirectory() as root:
+            root = Path(root)
+            store = Store(root / 'manual.sqlite')
+            original = extracted()
+            store.put(original)
+            revision = amend(original, partial=True)
+            raw = financial_document().replace(b'>10-K<', b'>10-K/A<')
+            doc = revision['document']
+            doc['original_sha256'] = sha256(raw).hexdigest()
+            filing = dict(FILING, accessionNumber=doc['accession'], form=doc['form'],
+                          filingDate=doc['published_on'])
+            (root / 'report.htm').write_bytes(raw)
+            (root / 'snapshot.json').write_text(json.dumps(revision), encoding='utf-8')
+            (root / 'index.json').write_text(json.dumps({'cik': CIK, 'filings': {'recent': arrays(filing)}}),
+                                             encoding='utf-8')
+            result = subprocess.run([
+                sys.executable, '-m', 'hiwd_company', 'import-original', '--snapshot', str(root / 'snapshot.json'),
+                '--html', str(root / 'report.htm'), '--index', str(root / 'index.json'), '--db', str(store.path),
+                '--supersedes', ACC, original['document']['original_sha256'],
+            ], capture_output=True, text=True, timeout=10)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('amendment_requires_review', result.stderr)
+            self.assertEqual(store.read(CIK)['document']['accession'], ACC)
+            self.assertIsNone(store.read(CIK, doc['accession'], doc['original_sha256']))
+
+    def test_legacy_amendment_is_unreadable_by_both_api_keys_and_review_cli_rejects_it(self):
+        with tempfile.TemporaryDirectory() as root:
+            cache_path = Path(root) / 'research.sqlite'
+            report_path = Path(str(cache_path) + '.reports.sqlite')
+            old_store = Store(report_path)
+            original = extracted()
+            legacy = deepcopy(original)
+            legacy['schema_version'] = 3
+            old_store.put(legacy)
+            revision = amend(original, partial=True)
+            legacy_revision = {**revision, 'schema_version': 3}
+            with old_store.connect() as db:
+                old_store._put(db, legacy_revision, (ACC, original['document']['original_sha256']))
+            research = Research(cache_path)
+            server = ThreadingHTTPServer(('127.0.0.1', 0), handler_for(Store(Path(root) / 'manual.sqlite'), research))
+            thread = Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+            doc = revision['document']
+            original_path = f'/api/reader?cik={CIK}&accession={ACC}'
+            revision_path = f"/api/reader?cik={CIK}&accession={doc['accession']}"
+
+            def get(route):
+                connection = HTTPConnection('127.0.0.1', server.server_port, timeout=3)
+                try:
+                    connection.request('GET', route)
+                    response = connection.getresponse()
+                    return response.status, json.loads(response.read())
+                finally:
+                    connection.close()
+
+            try:
+                self.assertEqual(get(original_path), (409, {'status': 'needs_semantic_review'}))
+                self.assertEqual(get(revision_path)[0], 404)
+                self.assertEqual(get(revision_path + '&version=' + doc['original_sha256']),
+                                 (409, {'status': 'needs_semantic_review'}))
+                self.assertEqual(research.store.attest(original), 'attested')
+                status, read = get(original_path)
+                self.assertEqual(status, 200)
+                for key in ('accession', 'published_on', 'report_end', 'original_sha256'):
+                    self.assertEqual(read['document'][key], original['document'][key])
+                research.store.stage_revision(revision)
+                decision = research.store.revision_review(CIK, doc['accession'], doc['original_sha256'])
+                decision['note'] = 'The partial candidate is a negative fixture.'
+                path = Path(root) / 'decision.json'
+                path.write_text(json.dumps(decision), encoding='utf-8')
+                result = subprocess.run([
+                    sys.executable, '-m', 'hiwd_company', 'review-revision', '--research-cache', str(cache_path),
+                    '--cik', CIK, '--accession', doc['accession'], '--sha', doc['original_sha256'], '--decision', str(path),
+                ], capture_output=True, text=True, timeout=10)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('partial_amendment_cannot_replace_baseline', result.stderr)
+                self.assertEqual(research.store.read(CIK)['document']['accession'], ACC)
+                self.assertEqual(get(revision_path)[0], 404)
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join()
+                research.close()
 
 
 class RetryCache(unittest.TestCase):
