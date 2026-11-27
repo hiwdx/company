@@ -1,0 +1,1881 @@
+{
+  "provider": "WeStock",
+  "binary_sha256": "8018d5f7fe8efbd97887afee4d79f8c6cd900b586b99ea0de6d1ce7d53abdb8c",
+  "results": [
+    {
+      "at": "2026-11-27T08:28:50.053596+00:00",
+      "command": [
+        "westock",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "91d7af2d1334c53ef9b40e2656a79f9395adb5becdee9b4deacead33b08aa08f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 47,
+      "summary": {
+        "tables": [],
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "version": "westock version westock 0.0.2 channel=skillhub",
+      "elapsed_ms": 23
+    },
+    {
+      "at": "2026-11-27T08:28:51.177171+00:00",
+      "command": [
+        "westock",
+        "search",
+        "AAPL"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "5758af7bc692fb27fb51c803aa1b814d8e3d0819626f2ee09478b3d5d262a5a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 109,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "usAAPL",
+            "name": "苹果",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 3936
+    },
+    {
+      "at": "2026-11-27T08:28:56.215395+00:00",
+      "command": [
+        "westock",
+        "search",
+        "Apple"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "7f42cf3fd8e852c5654cadcc3af9dca87ec2c419969ecbbdfb84e19e4a4619e4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 163,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 2
+          }
+        ],
+        "matches": [
+          {
+            "code": "usAAPL",
+            "name": "苹果(Apple)",
+            "type": "GP"
+          },
+          {
+            "code": "usAPLE",
+            "name": "Apple Hospitality Reit, Inc.",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4676
+    },
+    {
+      "at": "2026-11-27T08:29:01.992476+00:00",
+      "command": [
+        "westock",
+        "search",
+        "苹果"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "5758af7bc692fb27fb51c803aa1b814d8e3d0819626f2ee09478b3d5d262a5a7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 109,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "usAAPL",
+            "name": "苹果",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4524
+    },
+    {
+      "at": "2026-11-27T08:29:07.621393+00:00",
+      "command": [
+        "westock",
+        "search",
+        "TSM"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "ef61f483f042eee533dc2ed4467fd8120f79baa76ae1bc889f76a0ccdb1fa793",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 435,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 10
+          }
+        ],
+        "matches": [
+          {
+            "code": "usTSM",
+            "name": "台积电",
+            "type": "GP"
+          },
+          {
+            "code": "sh600546",
+            "name": "山煤国际",
+            "type": "GP-A"
+          },
+          {
+            "code": "sz000632",
+            "name": "ST三木",
+            "type": "GP-A"
+          },
+          {
+            "code": "sz000935",
+            "name": "四川双马",
+            "type": "GP-A"
+          },
+          {
+            "code": "sh600689",
+            "name": "上海三毛",
+            "type": "GP-A"
+          },
+          {
+            "code": "hk06113",
+            "name": "比特策略",
+            "type": "GP"
+          },
+          {
+            "code": "sh900922",
+            "name": "三毛B股",
+            "type": "GP-B"
+          },
+          {
+            "code": "usTSMWF",
+            "name": "Taiwan Semiconductor Manufacturing",
+            "type": "GP"
+          },
+          {
+            "code": "sh600091",
+            "name": "退市明科",
+            "type": "GP-A"
+          },
+          {
+            "code": "sh600823",
+            "name": "*ST世茂",
+            "type": "GP-A"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4260
+    },
+    {
+      "at": "2026-11-27T08:29:12.983059+00:00",
+      "command": [
+        "westock",
+        "search",
+        "Taiwan Semiconductor"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c79abe11cb15df3770c9da7bd511ddb6935997e4b04a1be31735185dbf46afa4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 201,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 2
+          }
+        ],
+        "matches": [
+          {
+            "code": "usTSM",
+            "name": "台积电(Taiwan Semiconductor Manufacturing)",
+            "type": "GP"
+          },
+          {
+            "code": "usTSMWF",
+            "name": "Taiwan Semiconductor Manufacturing",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4015
+    },
+    {
+      "at": "2026-11-27T08:29:18.103583+00:00",
+      "command": [
+        "westock",
+        "search",
+        "台积电"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "570debc937a3ff1f15a696445a8d137877b27bc15adfd2b19aaa93d060a59ebc",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 111,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "usTSM",
+            "name": "台积电",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 3832
+    },
+    {
+      "at": "2026-11-27T08:29:23.037756+00:00",
+      "command": [
+        "westock",
+        "search",
+        "00700"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "992a35ed20a681f65a8dc0a5c63ce98d743de7ad3661de8044c261d9e8ea0bd6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 293,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 6
+          }
+        ],
+        "matches": [
+          {
+            "code": "hk00700",
+            "name": "腾讯控股",
+            "type": "GP"
+          },
+          {
+            "code": "hk80700",
+            "name": "腾讯控股-R",
+            "type": "GP"
+          },
+          {
+            "code": "usTCEHY",
+            "name": "腾讯控股(ADR)",
+            "type": "GP"
+          },
+          {
+            "code": "sz000700",
+            "name": "模塑科技",
+            "type": "GP-A"
+          },
+          {
+            "code": "sz300700",
+            "name": "岱勒新材",
+            "type": "GP-A-CYB"
+          },
+          {
+            "code": "sh600700",
+            "name": "*ST数码",
+            "type": "GP-A"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5100
+    },
+    {
+      "at": "2026-11-27T08:29:29.241745+00:00",
+      "command": [
+        "westock",
+        "search",
+        "Tencent"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "6442bfe3f88c3a4a1aca34b77fa7fde954c993fcf168b623e84291a0e9c6bb9a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 434,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 8
+          }
+        ],
+        "matches": [
+          {
+            "code": "usTCEHY",
+            "name": "腾讯控股(ADR)(Tencent)",
+            "type": "GP"
+          },
+          {
+            "code": "hk00700",
+            "name": "腾讯控股",
+            "type": "GP"
+          },
+          {
+            "code": "hk80700",
+            "name": "腾讯控股-R(TENCENT-R)",
+            "type": "GP"
+          },
+          {
+            "code": "usTME",
+            "name": "腾讯音乐(Tencent Music)",
+            "type": "GP"
+          },
+          {
+            "code": "hk01698",
+            "name": "腾讯音乐-SW",
+            "type": "GP"
+          },
+          {
+            "code": "usTCTZF",
+            "name": "腾讯控股(Tencent Holdings Limited)",
+            "type": "GP"
+          },
+          {
+            "code": "usTCMEF",
+            "name": "Tencent Music Entertainment Group",
+            "type": "GP"
+          },
+          {
+            "code": "usHUYTF",
+            "name": "Hony Media Group",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5284
+    },
+    {
+      "at": "2026-11-27T08:29:35.628854+00:00",
+      "command": [
+        "westock",
+        "search",
+        "腾讯控股"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "7549779bb3ad9b4e2e7668b6a96f9eb379de89ac87693b40f42c1c139fb6b761",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 219,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 4
+          }
+        ],
+        "matches": [
+          {
+            "code": "hk00700",
+            "name": "腾讯控股",
+            "type": "GP"
+          },
+          {
+            "code": "hk80700",
+            "name": "腾讯控股-R",
+            "type": "GP"
+          },
+          {
+            "code": "usTCEHY",
+            "name": "腾讯控股(ADR)",
+            "type": "GP"
+          },
+          {
+            "code": "usTCTZF",
+            "name": "腾讯控股",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 1282
+    },
+    {
+      "at": "2026-11-27T08:29:38.016651+00:00",
+      "command": [
+        "westock",
+        "search",
+        "09988"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "6ccd2521e1cefdd016ca54413898d4dd728b2148e21251fa6960e673e5de5e71",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 184,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 3
+          }
+        ],
+        "matches": [
+          {
+            "code": "hk09988",
+            "name": "阿里巴巴-W",
+            "type": "GP"
+          },
+          {
+            "code": "hk89988",
+            "name": "阿里巴巴-WR",
+            "type": "GP"
+          },
+          {
+            "code": "usBABA",
+            "name": "阿里巴巴",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4823
+    },
+    {
+      "at": "2026-11-27T08:29:43.944573+00:00",
+      "command": [
+        "westock",
+        "search",
+        "Alibaba"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "66d853fb08818c99f3dc4c73f8eff88fbac5ae77fba20f51d1705b438ff6955e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 216,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 4
+          }
+        ],
+        "matches": [
+          {
+            "code": "hk09988",
+            "name": "阿里巴巴-W",
+            "type": "GP"
+          },
+          {
+            "code": "hk89988",
+            "name": "阿里巴巴-WR",
+            "type": "GP"
+          },
+          {
+            "code": "usBABA",
+            "name": "阿里巴巴",
+            "type": "GP"
+          },
+          {
+            "code": "usBABAF",
+            "name": "阿里巴巴",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 1658
+    },
+    {
+      "at": "2026-11-27T08:29:46.716937+00:00",
+      "command": [
+        "westock",
+        "search",
+        "阿里巴巴"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "66d853fb08818c99f3dc4c73f8eff88fbac5ae77fba20f51d1705b438ff6955e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 216,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 4
+          }
+        ],
+        "matches": [
+          {
+            "code": "hk09988",
+            "name": "阿里巴巴-W",
+            "type": "GP"
+          },
+          {
+            "code": "hk89988",
+            "name": "阿里巴巴-WR",
+            "type": "GP"
+          },
+          {
+            "code": "usBABA",
+            "name": "阿里巴巴",
+            "type": "GP"
+          },
+          {
+            "code": "usBABAF",
+            "name": "阿里巴巴",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 3293
+    },
+    {
+      "at": "2026-11-27T08:29:51.115336+00:00",
+      "command": [
+        "westock",
+        "search",
+        "600519"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "af9b9fa4002a64729cacfc8a8ae712988d827e5491525bd6c673bea420bd7e90",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 119,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "sh600519",
+            "name": "贵州茅台",
+            "type": "GP-A"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4841
+    },
+    {
+      "at": "2026-11-27T08:29:57.059098+00:00",
+      "command": [
+        "westock",
+        "search",
+        "Kweichow Moutai"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "af9b9fa4002a64729cacfc8a8ae712988d827e5491525bd6c673bea420bd7e90",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 119,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "sh600519",
+            "name": "贵州茅台",
+            "type": "GP-A"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4069
+    },
+    {
+      "at": "2026-11-27T08:30:02.231354+00:00",
+      "command": [
+        "westock",
+        "search",
+        "贵州茅台"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "af9b9fa4002a64729cacfc8a8ae712988d827e5491525bd6c673bea420bd7e90",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 119,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "sh600519",
+            "name": "贵州茅台",
+            "type": "GP-A"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 3158
+    },
+    {
+      "at": "2026-11-27T08:30:06.494921+00:00",
+      "command": [
+        "westock",
+        "search",
+        "601398"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "5999af9b68c19a87c6cda6389133a10c3f2334fadb8a46f485817ae2e663fa71",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 119,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 1
+          }
+        ],
+        "matches": [
+          {
+            "code": "sh601398",
+            "name": "工商银行",
+            "type": "GP-A"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5251
+    },
+    {
+      "at": "2026-11-27T08:30:12.849565+00:00",
+      "command": [
+        "westock",
+        "search",
+        "ICBC"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "aef76b0e528eafab4a545572d5f90d026fe4251b1e25ad1d28a8361bc08be2ee",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 192,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 3
+          }
+        ],
+        "matches": [
+          {
+            "code": "hk01398",
+            "name": "工商银行(ICBC)",
+            "type": "GP"
+          },
+          {
+            "code": "usIDCBY",
+            "name": "工商银行",
+            "type": "GP"
+          },
+          {
+            "code": "usIDCBF",
+            "name": "中国工商银行",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4598
+    },
+    {
+      "at": "2026-11-27T08:30:18.551357+00:00",
+      "command": [
+        "westock",
+        "search",
+        "工商银行"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "065da73e77d5e4ac26c001fbfad20346a10e4dc8bcfbe930b88731030c85e276",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 221,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "type"
+            ],
+            "row_count": 4
+          }
+        ],
+        "matches": [
+          {
+            "code": "sh601398",
+            "name": "工商银行",
+            "type": "GP-A"
+          },
+          {
+            "code": "hk01398",
+            "name": "工商银行",
+            "type": "GP"
+          },
+          {
+            "code": "usIDCBY",
+            "name": "工商银行",
+            "type": "GP"
+          },
+          {
+            "code": "usIDCBF",
+            "name": "中国工商银行",
+            "type": "GP"
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 953
+    },
+    {
+      "at": "2026-11-27T08:30:20.610237+00:00",
+      "command": [
+        "westock",
+        "profile",
+        "usAAPL,usTSM"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "84df5fd10ee85aa2376a1bd5f00c1e99be9658b5ce7ba1a463154848ddf624f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1756,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "listedDate",
+              "introduction",
+              "website",
+              "industry",
+              "exchange"
+            ],
+            "row_count": 2
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": true,
+        "profile_metadata_review": "v1 multiline parsing unreliable; see followup run; malformed non-header payload omitted"
+      },
+      "elapsed_ms": 3969
+    },
+    {
+      "at": "2026-11-27T08:30:25.687143+00:00",
+      "command": [
+        "westock",
+        "finance",
+        "usAAPL,usTSM",
+        "--limit",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "bacd39f64991973ee9cd09149c8b7fda198994e5b6cf8a0f59be18e2b0c66684",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 4111,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "DisclosureCurrency",
+              "BasicEPS_Q",
+              "DilutedEPS_Q",
+              "EBITDA_Q",
+              "EBIT_Q",
+              "GrossIncome_Q",
+              "GrossMargin_Q",
+              "NetIncome_Q",
+              "NetMargin_Q",
+              "PretaxIncome_Q",
+              "Sales_Q"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "DisclosureCurrency",
+              "CurrentAssets",
+              "CurrentLiabilities",
+              "LiabilityToAsset",
+              "LongTermDebt",
+              "ROA",
+              "ROE",
+              "ShareHolderEquity",
+              "ShortTermDebt",
+              "TotalAssets",
+              "TotalEquity",
+              "TotalLiabilities"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "DisclosureCurrency",
+              "CFF_Q",
+              "CFI_Q",
+              "CFO_Q",
+              "Capex_Q",
+              "FreeCF_Q"
+            ],
+            "row_count": 8
+          }
+        ],
+        "period_metadata": [
+          {
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "USD"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "DisclosureCurrency": "TWD"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "DisclosureCurrency": "TWD"
+          }
+        ],
+        "numeric_values_saved": false,
+        "has_rows": true,
+        "has_error_marker": true
+      },
+      "elapsed_ms": 5895
+    },
+    {
+      "at": "2026-11-27T08:30:32.685059+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "usAAPL,usTSM",
+        "--type",
+        "1",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "2545783f5ed6841a2a272e446901cdd53e24bc074733a74cbd80b886ea1c19e4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1051,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "chineseTitle",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "chineseTitle",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nou5493647",
+            "symbol": "usAAPL",
+            "time": "2026-11-03 08:06:00",
+            "update_time": "2026-11-03 21:09:35"
+          },
+          {
+            "id": "nou5343849",
+            "symbol": "usAAPL",
+            "time": "2026-07-31 06:07:25",
+            "update_time": "2026-07-31 18:09:58"
+          },
+          {
+            "id": "nou5145682",
+            "symbol": "usTSM",
+            "time": "2026-04-16 06:06:58",
+            "update_time": "2026-04-16 19:10:56"
+          },
+          {
+            "id": "nou4382020",
+            "symbol": "usTSM",
+            "time": "2025-04-17 06:17:09",
+            "update_time": "2025-04-17 21:10:38"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4511
+    },
+    {
+      "at": "2026-11-27T08:30:38.301448+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nou5493647"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c487105af21dde625705b569a84166c9fbaf2a857825103e03bd0114bfc41b84",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 132,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5580
+    },
+    {
+      "at": "2026-11-27T08:30:44.986723+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nou5343849"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "7b3434ffefc14d4d62450841c86ddcd8a9fab5522fa9714029b0143378625910",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 135,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 1229
+    },
+    {
+      "at": "2026-11-27T08:30:47.320855+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nou5145682"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "2bc5908f44506ba9dfaf1eeb7f7c6516b651f295fef0817d056b3a91a396dd02",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 172,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5621
+    },
+    {
+      "at": "2026-11-27T08:30:54.042948+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nou4382020"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "a05e31ee97bbef7807fac5666b89ff5fa4cafc4a007f77d8e0488bebd7c3a217",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 172,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5183
+    },
+    {
+      "at": "2026-11-27T08:31:00.330928+00:00",
+      "command": [
+        "westock",
+        "profile",
+        "hk00700,hk09988"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "1c62691a6ac272e9d03ba01f01430ea64a8f6f24dcec6c5c7d5a3550db21b931",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 4339,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "listedDate",
+              "introduction",
+              "business",
+              "website",
+              "chairman",
+              "industry",
+              "regAddress",
+              "tel",
+              "email"
+            ],
+            "row_count": 0
+          }
+        ],
+        "has_rows": false,
+        "has_error_marker": true,
+        "profile_metadata_review": "v1 multiline parsing unreliable; see followup run; malformed non-header payload omitted"
+      },
+      "elapsed_ms": 3812
+    },
+    {
+      "at": "2026-11-27T08:31:05.249193+00:00",
+      "command": [
+        "westock",
+        "finance",
+        "hk00700,hk09988",
+        "--limit",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "72d7c95e611fa1a6cdaf13a96521f4aae38a4453f678550f8a16ca8bd19293f5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 5979,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "CurrencyType",
+              "BasicEPS",
+              "DebtAssetsRatio",
+              "EPS",
+              "EarningAfterTax",
+              "EarningBeforeTax",
+              "GrossIncomeRatio",
+              "NetProfitGr1y",
+              "NetProfitRatio",
+              "NpParentCompanyGr1y",
+              "NpParentCompanyGr3y",
+              "OperExpenses",
+              "OperatingIncome",
+              "OperatingProfit",
+              "OperatingRevenueGr1y",
+              "OperatingRevenueGr3y",
+              "ProfitToShareholders",
+              "ROA",
+              "RoeWeighted"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "CurrencyType",
+              "Cash",
+              "Goodwill",
+              "SeWithoutMinority",
+              "TotalAssets",
+              "TotalCurrentAssets",
+              "TotalCurrentLiability",
+              "TotalEquity",
+              "TotalLiability",
+              "TotalNonCurrentAssets",
+              "TotalNonCurrentLiability"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "CurrencyType",
+              "CFF",
+              "CFI",
+              "CFO",
+              "Cashequivalentincrease"
+            ],
+            "row_count": 8
+          }
+        ],
+        "period_metadata": [
+          {
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-09-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-06-30",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2026-03-31",
+            "CurrencyType": "港币"
+          },
+          {
+            "EndDate": "2025-12-31",
+            "CurrencyType": "港币"
+          }
+        ],
+        "numeric_values_saved": false,
+        "has_rows": true,
+        "has_error_marker": true
+      },
+      "elapsed_ms": 5493
+    },
+    {
+      "at": "2026-11-27T08:31:11.846235+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "hk00700,hk09988",
+        "--type",
+        "1",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "638e455c4ae5a87eecb8dd0ec12b2379b51e851fc738549d57c451122ea0f3b5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1124,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nokHKEX-EPS-20261118-12416824",
+            "symbol": "hk00700",
+            "time": "2026-11-18 16:30:43",
+            "update_time": "2026-11-18 16:31:25"
+          },
+          {
+            "id": "nokHKEX-EPS-20260812-12280991",
+            "symbol": "hk00700",
+            "time": "2026-08-12 16:31:07",
+            "update_time": "2026-08-12 16:31:56"
+          },
+          {
+            "id": "nokHKEX-EPS-20261119-12418764",
+            "symbol": "hk09988",
+            "time": "2026-11-19 18:16:02",
+            "update_time": "2026-11-19 18:16:15"
+          },
+          {
+            "id": "nokHKEX-EPS-20260820-12292434",
+            "symbol": "hk09988",
+            "time": "2026-08-20 17:46:34",
+            "update_time": "2026-08-20 17:46:47"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 3663
+    },
+    {
+      "at": "2026-11-27T08:31:16.611150+00:00",
+      "command": [
+        "westock",
+        "profile",
+        "sh600519,sh601398"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "e60c4b39084c8a4fa049fe2f01845d90bab0dd1d740c482ef7b60ec5abdc0da4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1066,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "name",
+              "listedDate",
+              "business",
+              "website",
+              "chairman",
+              "industry",
+              "sector",
+              "issuePrice",
+              "regCapital",
+              "establishDate",
+              "regAddress",
+              "officeAddress",
+              "tel",
+              "email"
+            ],
+            "row_count": 2
+          }
+        ],
+        "has_rows": true,
+        "has_error_marker": true,
+        "profile_metadata_review": "v1 multiline parsing unreliable; see followup run; malformed non-header payload omitted"
+      },
+      "elapsed_ms": 3266
+    },
+    {
+      "at": "2026-11-27T08:31:20.980432+00:00",
+      "command": [
+        "westock",
+        "finance",
+        "sh600519,sh601398",
+        "--limit",
+        "4"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "cc4a8769885172cea6d437a8c8245b86e90c9807ff826e51ba601df3c7ad436b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 8678,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "BasicEPS",
+              "DilutedEPS",
+              "DividendTTM",
+              "EBIT",
+              "EPSTTM",
+              "GrossIncomeRatio",
+              "GrossProfitTTM",
+              "NPDeductNonRecurringPL",
+              "NPPCCGrowRate3Y",
+              "NPParentCompanyCutYOY_Q",
+              "NPParentCompanyOwners",
+              "NPParentCompanyOwnersTTM",
+              "NPParentCompanyYOY",
+              "NPParentCompanyYOY_Q",
+              "NetProfitRatio",
+              "ORComGrowRate3Y",
+              "OperatingCost",
+              "OperatingProfit",
+              "OperatingProfitTTM",
+              "OperatingRevenue",
+              "OperatingRevenueGrowRate_Q",
+              "OperatingRevenueTTM",
+              "RAndD",
+              "ROA",
+              "ROATTM",
+              "ROE",
+              "ROECut",
+              "ROETTM",
+              "ROEWeighted",
+              "ROIC",
+              "TORGrowRate",
+              "TORGrowRate_Q",
+              "TotalOperatingRevenue",
+              "TotalProfit"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "ARTRate",
+              "CashEquivalents",
+              "CurrentRatio",
+              "DebtAssetsRatio",
+              "DebtEquityRatio",
+              "InterestBearDebt",
+              "InventoryTRate",
+              "NAPS",
+              "QuickRatio",
+              "SEWithoutMI",
+              "TotalAssetTRate",
+              "TotalCurrentAssets",
+              "TotalCurrentLiability",
+              "TotalLiability",
+              "TotalNonCurrentAssets",
+              "TotalNonCurrentLiability",
+              "TotalShareholderEquity",
+              "WorkingCapital"
+            ],
+            "row_count": 8
+          },
+          {
+            "columns": [
+              "code",
+              "EndDate",
+              "FCFE",
+              "FCFF",
+              "GoodsSaleServiceRenderCash",
+              "NetCashFlowTTM",
+              "NetFinanceCashFlow",
+              "NetFinanceCashFlowTTM",
+              "NetInvestCashFlow",
+              "NetInvestCashFlowTTM",
+              "NetOperateCashFlow",
+              "NetOperateCashFlowTTM",
+              "OperCashFlowPS"
+            ],
+            "row_count": 8
+          }
+        ],
+        "period_metadata": [
+          {
+            "EndDate": "2026-09-30"
+          },
+          {
+            "EndDate": "2026-06-30"
+          },
+          {
+            "EndDate": "2026-03-31"
+          },
+          {
+            "EndDate": "2025-12-31"
+          },
+          {
+            "EndDate": "2026-09-30"
+          },
+          {
+            "EndDate": "2026-06-30"
+          },
+          {
+            "EndDate": "2026-03-31"
+          },
+          {
+            "EndDate": "2025-12-31"
+          },
+          {
+            "EndDate": "2026-09-30"
+          },
+          {
+            "EndDate": "2026-06-30"
+          },
+          {
+            "EndDate": "2026-03-31"
+          },
+          {
+            "EndDate": "2025-12-31"
+          },
+          {
+            "EndDate": "2026-09-30"
+          },
+          {
+            "EndDate": "2026-06-30"
+          },
+          {
+            "EndDate": "2026-03-31"
+          },
+          {
+            "EndDate": "2025-12-31"
+          },
+          {
+            "EndDate": "2026-09-30"
+          },
+          {
+            "EndDate": "2026-06-30"
+          },
+          {
+            "EndDate": "2026-03-31"
+          },
+          {
+            "EndDate": "2025-12-31"
+          },
+          {
+            "EndDate": "2026-09-30"
+          },
+          {
+            "EndDate": "2026-06-30"
+          },
+          {
+            "EndDate": "2026-03-31"
+          },
+          {
+            "EndDate": "2025-12-31"
+          }
+        ],
+        "numeric_values_saved": false,
+        "has_rows": true,
+        "has_error_marker": true
+      },
+      "elapsed_ms": 4605
+    },
+    {
+      "at": "2026-11-27T08:31:26.691158+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "list",
+        "sh600519,sh601398",
+        "--type",
+        "1",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "5ff2b1c9e465025ed2b61164ec890287f52674f1b1a87e2af759e68fad312766",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 1113,
+      "summary": {
+        "tables": [
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          },
+          {
+            "columns": [
+              "type",
+              "Ftranslate",
+              "id",
+              "newstype",
+              "symbol",
+              "time",
+              "title",
+              "update_time",
+              "url"
+            ],
+            "row_count": 2
+          }
+        ],
+        "records": [
+          {
+            "id": "nos1225649896",
+            "symbol": "sh600519",
+            "time": "2026-10-30 18:31:37",
+            "update_time": "2026-10-30 18:40:37"
+          },
+          {
+            "id": "nos1225475868",
+            "symbol": "sh600519",
+            "time": "2026-08-14 20:41:29",
+            "update_time": "2026-08-14 20:48:51"
+          },
+          {
+            "id": "nos1225648840",
+            "symbol": "sh601398",
+            "time": "2026-10-30 17:34:09",
+            "update_time": "2026-10-30 17:49:47"
+          },
+          {
+            "id": "nos1225648464",
+            "symbol": "sh601398",
+            "time": "2026-10-30 17:23:54",
+            "update_time": "2026-10-30 17:36:38"
+          }
+        ],
+        "url_nonempty_count": 0,
+        "has_rows": true,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4619
+    },
+    {
+      "at": "2026-11-27T08:31:32.420528+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nos1225649896"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "c6ae8ba8fa8775c07435013385a8efbbbad6a35817b30c02ab2a45e394226385",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 153,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4829
+    },
+    {
+      "at": "2026-11-27T08:31:38.352446+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nos1225475868"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "89956b43aec3c3ac0de03b610e429878442857ce1685bff4f3c6a2a380a89da0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 150,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4208
+    },
+    {
+      "at": "2026-11-27T08:31:43.665251+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nos1225648840"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "a6dba147d9e448674248d57693600b2931f503cba6c9cf05eadb8a983126254b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 164,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 5079
+    },
+    {
+      "at": "2026-11-27T08:31:49.849923+00:00",
+      "command": [
+        "westock",
+        "notice",
+        "detail",
+        "nos1225648464"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "3f6cb34fa459e8681f9f992581519261801134e5b86a14dccb0d9fa26272967c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 153,
+      "summary": {
+        "tables": [],
+        "public_urls": [],
+        "text_returned": true,
+        "has_rows": false,
+        "has_error_marker": false
+      },
+      "elapsed_ms": 4404
+    }
+  ],
+  "started_at": "2026-11-27T08:28:50.053400+00:00",
+  "finished_at": "2026-11-27T08:31:55.368540+00:00",
+  "scope": "single execution environment; no regional SLA claim",
+  "probe_revision": 1,
+  "interpretation_notes": [
+    "has_error_marker is unreliable in v1 because failure count 0 matched; use v2 followup for schema/links.",
+    "v1 accepted only HTTPS URLs and skipped hyphenated HK notice IDs; empty link arrays are not proof of upstream absence.",
+    "Malformed HK profile pseudo-header omitted from evidence to avoid republishing narrative content; stdout hash is unchanged."
+  ]
+}
