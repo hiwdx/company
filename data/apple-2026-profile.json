@@ -1,0 +1,34 @@
+{
+  "issuer": "Apple Inc.",
+  "cik": "0000320193",
+  "form": "10-K",
+  "accession": "0000320193-26-000026",
+  "published_on": "2026-11-03",
+  "accepted_at": "2026-11-03T13:05:15.000Z",
+  "report_end": "2026-09-26",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+  "original_sha256": "e45f7066c377ccbc136b6d059b70bbbd4a739b0c0c41cdebc7ec3f3d822a6f8e",
+  "companyfacts_sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad",
+  "retrieved_at": "2026-11-27T08:56:58.416444+00:00",
+  "reviewed_on": "2026-11-27",
+  "accounting_standard": "US_GAAP",
+  "scope": "consolidated",
+  "version_kind": "as_filed",
+  "periods": {
+    "2026": {
+      "start": "2025-09-28",
+      "end": "2026-09-26"
+    },
+    "2025": {
+      "start": "2024-09-29",
+      "end": "2025-09-27"
+    }
+  },
+  "source_policy": "SEC fair-access single-company research; no blanket copyright or production authorization claim",
+  "directory_url": "https://investor.apple.com/sec-filings/sec-filings-details/default.aspx?FilingId=19895604",
+  "history_complete": false,
+  "notes": [
+    "FY2025 comparatives are those presented in this FY2026 filing, not a separate earlier filing.",
+    "Annual period dates come from original XBRL contexts; SEC fiscalYearEnd metadata is not used to invent calendar dates."
+  ]
+}
