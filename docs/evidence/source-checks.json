@@ -1,0 +1,165 @@
+{
+  "observed_date": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "type": "research_observation_ledger_not_raw_provider_payloads",
+  "records": [
+    {
+      "id": "sec-api",
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "method": "web_direct_read",
+      "observation": "API documentation read; no authentication/API keys, JSON submissions/XBRL, no CORS. Not an endpoint success."
+    },
+    {
+      "id": "sec-access",
+      "url": "https://www.sec.gov/about/webmaster-frequently-asked-questions",
+      "method": "web_search_official",
+      "observation": "Declared User-Agent and 10 requests/second ceiling documented. Not a quota stress test."
+    },
+    {
+      "id": "hkex-terms",
+      "url": "https://www2.hkexnews.hk/Global/Exchange/Terms-of-Use?sc_lang=en",
+      "method": "web_search_official",
+      "observation": "Programmatic access and text/data mining restricted absent written permission. No disclosure scraping attempted."
+    },
+    {
+      "id": "hkex-iis",
+      "url": "https://www.hkex.com.hk/Services/Market-Data-Services/Infrastructure/Issuer-Information-feed-Service-%28IIS%29?sc_lang=en",
+      "method": "web_search_official",
+      "observation": "Formal issuer information feed identified; not subscribed/tested."
+    },
+    {
+      "id": "hkex-fees",
+      "url": "https://www.hkex.com.hk/Services/Rules-and-Forms-and-Fees/Fees/Securities-%28Hong-Kong%29/Market-Data/Market-Data-Vendors?sc_lang=en",
+      "method": "web_direct_read",
+      "observation": "IIS section lists HKD 45000/quarter redistribution fee; not a quote for this project or AI rights."
+    },
+    {
+      "id": "cninfo-main",
+      "url": "https://www.cninfo.com.cn/new/index?islogin=false",
+      "method": "web_search_official",
+      "observation": "Public disclosure directory and copyright/disclaimer observed. No authorization for backend aggregation established."
+    },
+    {
+      "id": "cninfo-platform",
+      "url": "https://webapi.cninfo.com.cn/",
+      "method": "curl_and_browser",
+      "observation": "Homepage HTML obtained with curl; browser home loaded. API help reached no useful content; apiDoc stayed loading/empty and data-center had no products in observation. No data API credential or request."
+    },
+    {
+      "id": "sse-legal",
+      "url": "https://www.sse.com.cn/home/legal/",
+      "method": "web_search_official",
+      "observation": "Noncommercial browsing/downloading and homepage-link conditions; no private query endpoint tested."
+    },
+    {
+      "id": "szse-legal",
+      "url": "https://www.szse.cn/application/laws/index.html",
+      "method": "curl_direct_read",
+      "observation": "Web tool timed out; local curl -f succeeded and legal page text read. Noncommercial and homepage-link conditions. Announcement adapter untested."
+    },
+    {
+      "id": "bse-main",
+      "url": "https://www.bse.cn/",
+      "method": "web_direct_read",
+      "observation": "No readable page content; not a successful disclosure test."
+    },
+    {
+      "id": "bse-legal",
+      "url": "https://www.bseinfo.net/about_neeq/legal_disclaimer.html",
+      "method": "web_search_official",
+      "observation": "Legal text identified via official domain; noncommercial and homepage-link conditions. Data API untested."
+    },
+    {
+      "id": "apple-terms",
+      "url": "https://www.apple.com/legal/internet-services/terms/site.html",
+      "method": "web_search_official",
+      "observation": "Automated use restrictions observed; no Apple website filing crawl performed."
+    },
+    {
+      "id": "tsmc-ir",
+      "url": "https://investor.tsmc.com/english/annual-reports",
+      "method": "web_direct_read",
+      "observation": "Directory contains 2025, 2024, 2023 annual reports and Form 20-F dates 2026-04-17, 2025-04-17, 2024-04-18. No financial facts extracted or persistent-use authorization established."
+    },
+    {
+      "id": "tencent-ir",
+      "url": "https://www.tencent.com/en-us/investors/financial-reports.html",
+      "method": "web_direct_read",
+      "observation": "No readable content returned; not counted as IR adapter success."
+    },
+    {
+      "id": "tencent-results",
+      "url": "https://www.tencent.com/wp-content/uploads/2026/11/E700_3Qresults.pdf",
+      "method": "web_index_only",
+      "observation": "Search index identifies RMB in millions on printed page 9; direct open returned no readable PDF. Currency conflict clue only, not completed PDF validation."
+    },
+    {
+      "id": "alibaba-ir",
+      "url": "https://www.alibabagroup.com/ir-financial-reports-financial-results",
+      "method": "web_search_official",
+      "observation": "FY2026/2025/2024 annual report directory observed; automated reuse rights not verified."
+    },
+    {
+      "id": "alibaba-fiscal-year",
+      "url": "https://www.alibabagroup.com/en-US/faqs-financial-reporting",
+      "method": "web_search_official",
+      "observation": "Official FAQ identifies March 31 fiscal year end."
+    },
+    {
+      "id": "alibaba-results",
+      "url": "https://data.alibabagroup.com/ecms-files/1532295521/332cda08-6a83-4bf7-86af-2ef3b348596d/Alibaba%20Group%20Announces%20September%20Quarter%202026%20Results%20and%20Interim%20Results%20for%20the%20Six%20Months%20Ended%20September%2030%2C%202026.pdf",
+      "method": "web_direct_pdf_read",
+      "observation": "39-page PDF directly read; page 1 identifies 2026-11-19 publication, September 30 quarter and six months, RMB primary amounts and USD convenience translation. Numeric tables not republished; this does not establish continuous ingestion/AI permission."
+    },
+    {
+      "id": "moutai-ir",
+      "url": "https://www.moutai.com.cn/mtgf/tzzgx/cwbg/index.html",
+      "method": "web_search_official",
+      "observation": "IR directory lists 2026 Q3 on 10-31, H1 on 08-15, Q1 on 04-25 and 2025 annual report. Vendor time date differs; no timezone inference."
+    },
+    {
+      "id": "icbc-ir",
+      "url": "https://www.icbc-ltd.com/ICBCLtd/Investor%20Relations/Financial%20Information/Financial%20Reports/",
+      "method": "web_search_official",
+      "observation": "IR directory includes 2025/2024/2023 annual reports and 2026 interim/Q1/Q3; A/H variants remain distinct. No amounts verified."
+    },
+    {
+      "id": "reuters-license",
+      "url": "https://reutersagency.com/license-reuters-content/",
+      "method": "web_direct_read",
+      "observation": "Official content licensing contact path found; no application, subscription or authorization."
+    },
+    {
+      "id": "bloomberg-policy",
+      "url": "https://bloomberg.com/tos",
+      "method": "web_search_official",
+      "observation": "No automated collection enabled."
+    },
+    {
+      "id": "cloudflare-pricing",
+      "url": "https://developers.cloudflare.com/workers/platform/pricing/",
+      "method": "web_direct_read",
+      "observation": "Paid minimum USD5/month documented; not a deployment or measured bill."
+    },
+    {
+      "id": "cloudflare-limits",
+      "url": "https://developers.cloudflare.com/workers/platform/limits/",
+      "method": "web_direct_read",
+      "observation": "128MB Worker memory documented; no native CLI/PDF runtime validation."
+    },
+    {
+      "id": "fly-pricing",
+      "url": "https://fly.io/pricing/",
+      "method": "web_search_official",
+      "observation": "Displayed smallest machine example USD2.19/month; regional/storage/egress costs additional. No resources provisioned."
+    }
+  ],
+  "not_verified": [
+    "MCP handshake/tools/list/tools/call",
+    "WeStock server-side licensing/quota/price",
+    "CNINFO authorized data API and exact quota",
+    "FT/WSJ/Caixin license and price",
+    "controlled multi-region connectivity",
+    "three-year/four-report/90-day completeness"
+  ]
+}

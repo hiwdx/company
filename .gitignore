@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+__pycache__/
+.venv/
+work/
+local-results/
+node_modules/
+.DS_Store

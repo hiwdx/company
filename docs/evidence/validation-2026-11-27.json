@@ -1,0 +1,54 @@
+{
+  "at": "2026-11-27T08:43:56.951117+00:00",
+  "kind": "offline_validation_not_live_provider_capability",
+  "results": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "output": "test_actual_error_remains_visible (test_probe.ProbeTests) ... ok\ntest_cli_denial_stops_later_queries (test_probe.ProbeTests) ... ok\ntest_host_denial_stops_sec_data_calls (test_probe.ProbeTests) ... ok\ntest_multiline_content_cannot_become_schema (test_probe.ProbeTests) ... ok\ntest_no_signed_urls_or_credentials_published (test_probe.ProbeTests) ... ok\ntest_nonsec_network_destinations_rejected_before_io (test_probe.ProbeTests) ... ok\ntest_zero_failures_is_not_error (test_probe.ProbeTests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.002s\n\nOK\n"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "py_compile",
+        "scripts/probe.py",
+        "scripts/prepare_westock.py"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "check": "evidence_json_parse",
+      "files": [
+        "docs/evidence/sec-2026-11-27.json",
+        "docs/evidence/source-checks.json",
+        "docs/evidence/validation-2026-11-27.json",
+        "docs/evidence/westock-2026-11-27.json",
+        "docs/evidence/westock-followup-2026-11-27.json",
+        "docs/evidence/westock-provenance.json"
+      ],
+      "passed": true
+    }
+  ],
+  "download_smoke": {
+    "command": [
+      "python3",
+      "scripts/prepare_westock.py"
+    ],
+    "observed_exit_code": 0,
+    "artifact": "westock-darwin-arm64",
+    "sha256": "8018d5f7fe8efbd97887afee4d79f8c6cd900b586b99ea0de6d1ce7d53abdb8c",
+    "content_sha256": "5ea98262ef1f3191c591e487316e4ce1c637bba6c37230c629157e8fa2dd2907",
+    "executed_by_downloader": false,
+    "note": "Observed successful bounded HTTPS redirect/download/hash smoke; downloaded executable not included in git."
+  }
+}
