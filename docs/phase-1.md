@@ -1,5 +1,7 @@
 # hiwd company · Apple 财报阅读原型
 
+这是 PR #4 的历史实验记录。当前运行、导入和多公司核验说明见 [Phase 1B](phase-1b.md)。
+
 [Issue #3](https://github.com/hiwdx/company/issues/3) 的真实数据阅读验收材料。核验日为 2026-11-27（Asia/Shanghai）。基于 `main` 独立开发，未合并的 Phase 0 PR #2 另行补充品牌/UI 研究。
 
 ## 来源与接入结果

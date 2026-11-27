@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "dataset_kind": "real_official_reviewed_snapshot",
+  "acquisition_mode": "sec_adapter_snapshot",
+  "issuer": {
+    "cik": "0000320193",
+    "name": "Apple Inc.",
+    "label": "Apple",
+    "aliases": [
+      "Apple Inc",
+      "苹果",
+      "蘋果"
+    ],
+    "issuer_type": "domestic",
+    "securities": [
+      {
+        "ticker": "AAPL",
+        "exchange": "Nasdaq",
+        "type": "普通股"
+      }
+    ]
+  },
+  "document": {
+    "accession": "0000320193-26-000020",
+    "form": "10-Q",
+    "published_on": "2026-07-31",
+    "report_end": "2026-06-27",
+    "currency": "USD",
+    "accounting_standard": "US_GAAP",
+    "scope": "consolidated",
+    "original_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+    "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38",
+    "reviewed_on": "2026-11-27",
+    "verification_status": "financials_verified",
+    "label": "2026 财年第三季度"
+  },
+  "narrative": [],
+  "facts": [
+    {"id": "revenue-current", "metric": "revenue", "slot": "current", "anchor": "f-56", "concept": "RevenueFromContractWithCustomerExcludingAssessedTax", "period_kind": "quarter", "period_start": "2026-03-29", "period_end": "2026-06-27", "cik": "0000320193", "value": "109417000000", "display_original": "109,417", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-18", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "net_income-current", "metric": "net_income", "slot": "current", "anchor": "f-104", "concept": "NetIncomeLoss", "period_kind": "quarter", "period_start": "2026-03-29", "period_end": "2026-06-27", "cik": "0000320193", "value": "29789000000", "display_original": "29,789", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-18", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_income-current", "metric": "operating_income", "slot": "current", "anchor": "f-88", "concept": "OperatingIncomeLoss", "period_kind": "quarter", "period_start": "2026-03-29", "period_end": "2026-06-27", "cik": "0000320193", "value": "35695000000", "display_original": "35,695", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-18", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_cash_flow-current", "metric": "operating_cash_flow", "slot": "current", "anchor": "f-320", "concept": "NetCashProvidedByUsedInOperatingActivities", "period_kind": "year_to_date", "period_start": "2025-09-28", "period_end": "2026-06-27", "cik": "0000320193", "value": "116996000000", "display_original": "116,996", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "assets-current", "metric": "assets", "slot": "current", "anchor": "f-188", "concept": "Assets", "period_kind": "instant", "period_start": null, "period_end": "2026-06-27", "cik": "0000320193", "value": "383266000000", "display_original": "383,266", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-21", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "liabilities-current", "metric": "liabilities", "slot": "current", "anchor": "f-208", "concept": "Liabilities", "period_kind": "instant", "period_start": null, "period_end": "2026-06-27", "cik": "0000320193", "value": "275746000000", "display_original": "275,746", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-21", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "revenue-prior", "metric": "revenue", "slot": "prior", "anchor": "f-57", "concept": "RevenueFromContractWithCustomerExcludingAssessedTax", "period_kind": "quarter", "period_start": "2025-03-30", "period_end": "2025-06-28", "cik": "0000320193", "value": "94036000000", "display_original": "94,036", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-19", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "net_income-prior", "metric": "net_income", "slot": "prior", "anchor": "f-105", "concept": "NetIncomeLoss", "period_kind": "quarter", "period_start": "2025-03-30", "period_end": "2025-06-28", "cik": "0000320193", "value": "23434000000", "display_original": "23,434", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-19", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_income-prior", "metric": "operating_income", "slot": "prior", "anchor": "f-89", "concept": "OperatingIncomeLoss", "period_kind": "quarter", "period_start": "2025-03-30", "period_end": "2025-06-28", "cik": "0000320193", "value": "28202000000", "display_original": "28,202", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-19", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_cash_flow-prior", "metric": "operating_cash_flow", "slot": "prior", "anchor": "f-321", "concept": "NetCashProvidedByUsedInOperatingActivities", "period_kind": "year_to_date", "period_start": "2024-09-29", "period_end": "2025-06-28", "cik": "0000320193", "value": "81754000000", "display_original": "81,754", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-20", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "assets-prior", "metric": "assets", "slot": "prior", "anchor": "f-189", "concept": "Assets", "period_kind": "instant", "period_start": null, "period_end": "2025-09-27", "cik": "0000320193", "value": "359241000000", "display_original": "359,241", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-22", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "liabilities-prior", "metric": "liabilities", "slot": "prior", "anchor": "f-209", "concept": "Liabilities", "period_kind": "instant", "period_start": null, "period_end": "2025-09-27", "cik": "0000320193", "value": "285508000000", "display_original": "285,508", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0000320193-26-000020", "original_sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38", "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm", "context_id": "c-22", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"}
+  ]
+}

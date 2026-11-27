@@ -14,5 +14,5 @@ jobs:
         with:
           node-version: '22'
       - run: python -m unittest discover -s tests -v
-      - run: python -m compileall -q hiwd_company
+      - run: python -m compileall -q hiwd_company scripts
       - run: node --check app/app.js

@@ -1,0 +1,37 @@
+[
+  {
+    "cik": "0000320193",
+    "name": "Apple Inc.",
+    "label": "Apple",
+    "aliases": ["Apple Inc", "苹果", "蘋果"],
+    "issuer_type": "domestic",
+    "securities": [{"ticker": "AAPL", "exchange": "Nasdaq", "type": "普通股"}]
+  },
+  {
+    "cik": "0000789019",
+    "name": "Microsoft Corporation",
+    "label": "Microsoft",
+    "aliases": ["Microsoft Corp", "微软", "微軟"],
+    "issuer_type": "domestic",
+    "securities": [{"ticker": "MSFT", "exchange": "Nasdaq", "type": "普通股"}]
+  },
+  {
+    "cik": "0001045810",
+    "name": "NVIDIA Corporation",
+    "label": "NVIDIA",
+    "aliases": ["NVIDIA Corp", "英伟达", "輝達"],
+    "issuer_type": "domestic",
+    "securities": [{"ticker": "NVDA", "exchange": "Nasdaq", "type": "普通股"}]
+  },
+  {
+    "cik": "0001046179",
+    "name": "Taiwan Semiconductor Manufacturing Company Limited",
+    "label": "台积电",
+    "aliases": ["TSMC", "Taiwan Semiconductor", "台积电", "台積電", "台灣積體電路製造股份有限公司"],
+    "issuer_type": "foreign_private_issuer",
+    "securities": [
+      {"ticker": "TSM", "exchange": "NYSE", "type": "ADS", "underlying_shares": 5},
+      {"ticker": "2330", "exchange": "TWSE", "type": "普通股"}
+    ]
+  }
+]

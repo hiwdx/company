@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "dataset_kind": "real_official_reviewed_snapshot",
+  "acquisition_mode": "sec_adapter_snapshot",
+  "issuer": {
+    "cik": "0001045810",
+    "name": "NVIDIA Corporation",
+    "label": "NVIDIA",
+    "aliases": [
+      "NVIDIA Corp",
+      "英伟达",
+      "輝達"
+    ],
+    "issuer_type": "domestic",
+    "securities": [
+      {
+        "ticker": "NVDA",
+        "exchange": "Nasdaq",
+        "type": "普通股"
+      }
+    ]
+  },
+  "document": {
+    "accession": "0001045810-26-000021",
+    "form": "10-K",
+    "published_on": "2026-02-25",
+    "report_end": "2026-01-25",
+    "currency": "USD",
+    "accounting_standard": "US_GAAP",
+    "scope": "consolidated",
+    "original_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+    "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5",
+    "reviewed_on": "2026-11-27",
+    "verification_status": "financials_verified",
+    "label": "2026 财年年报"
+  },
+  "narrative": [
+    {
+      "kind": "business",
+      "anchor": "i82ea215a7c1f4862b6518f1348ddc832_1828",
+      "text": "公司提供加速计算平台，业务包括计算与网络、图形两大报告分部。"
+    },
+    {
+      "kind": "management_statement",
+      "anchor": "i82ea215a7c1f4862b6518f1348ddc832_2280",
+      "text": "管理层将数据中心收入增长与加速计算及人工智能的平台转移联系起来。"
+    }
+  ],
+  "facts": [
+    {"id": "revenue-current", "metric": "revenue", "slot": "current", "anchor": "f-72", "concept": "Revenues", "period_kind": "annual", "period_start": "2025-01-27", "period_end": "2026-01-25", "cik": "0001045810", "value": "215938000000", "display_original": "215,938", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "net_income-current", "metric": "net_income", "slot": "current", "anchor": "f-111", "concept": "NetIncomeLoss", "period_kind": "annual", "period_start": "2025-01-27", "period_end": "2026-01-25", "cik": "0001045810", "value": "120067000000", "display_original": "120,067", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_income-current", "metric": "operating_income", "slot": "current", "anchor": "f-90", "concept": "OperatingIncomeLoss", "period_kind": "annual", "period_start": "2025-01-27", "period_end": "2026-01-25", "cik": "0001045810", "value": "130387000000", "display_original": "130,387", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_cash_flow-current", "metric": "operating_cash_flow", "slot": "current", "anchor": "f-335", "concept": "NetCashProvidedByUsedInOperatingActivities", "period_kind": "annual", "period_start": "2025-01-27", "period_end": "2026-01-25", "cik": "0001045810", "value": "102718000000", "display_original": "102,718", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-1", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "assets-current", "metric": "assets", "slot": "current", "anchor": "f-167", "concept": "Assets", "period_kind": "instant", "period_start": null, "period_end": "2026-01-25", "cik": "0001045810", "value": "206803000000", "display_original": "206,803", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-11", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "liabilities-current", "metric": "liabilities", "slot": "current", "anchor": "f-183", "concept": "Liabilities", "period_kind": "instant", "period_start": null, "period_end": "2026-01-25", "cik": "0001045810", "value": "49510000000", "display_original": "49,510", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-11", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "revenue-prior", "metric": "revenue", "slot": "prior", "anchor": "f-73", "concept": "Revenues", "period_kind": "annual", "period_start": "2024-01-29", "period_end": "2025-01-26", "cik": "0001045810", "value": "130497000000", "display_original": "130,497", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-9", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "net_income-prior", "metric": "net_income", "slot": "prior", "anchor": "f-112", "concept": "NetIncomeLoss", "period_kind": "annual", "period_start": "2024-01-29", "period_end": "2025-01-26", "cik": "0001045810", "value": "72880000000", "display_original": "72,880", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-9", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_income-prior", "metric": "operating_income", "slot": "prior", "anchor": "f-91", "concept": "OperatingIncomeLoss", "period_kind": "annual", "period_start": "2024-01-29", "period_end": "2025-01-26", "cik": "0001045810", "value": "81453000000", "display_original": "81,453", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-9", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "operating_cash_flow-prior", "metric": "operating_cash_flow", "slot": "prior", "anchor": "f-336", "concept": "NetCashProvidedByUsedInOperatingActivities", "period_kind": "annual", "period_start": "2024-01-29", "period_end": "2025-01-26", "cik": "0001045810", "value": "64089000000", "display_original": "64,089", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-9", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "assets-prior", "metric": "assets", "slot": "prior", "anchor": "f-168", "concept": "Assets", "period_kind": "instant", "period_start": null, "period_end": "2025-01-26", "cik": "0001045810", "value": "111601000000", "display_original": "111,601", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-12", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "liabilities-prior", "metric": "liabilities", "slot": "prior", "anchor": "f-184", "concept": "Liabilities", "period_kind": "instant", "period_start": null, "period_end": "2025-01-26", "cik": "0001045810", "value": "32274000000", "display_original": "32,274", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "consolidated", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-12", "status": "verified", "verification": "ixbrl_companyfacts_and_checkpoint"},
+    {"id": "segment_revenue-f-1119", "metric": "segment_revenue", "slot": "current", "anchor": "f-1119", "concept": "Revenues", "period_kind": "annual", "period_start": "2025-01-27", "period_end": "2026-01-25", "segment": "计算与网络", "members": [["srt:ConsolidationItemsAxis", "us-gaap:OperatingSegmentsMember"], ["us-gaap:StatementBusinessSegmentsAxis", "nvda:ComputeAndNetworkingSegmentMember"]], "cik": "0001045810", "value": "193479000000", "display_original": "193,479", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "segment", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-193", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"},
+    {"id": "segment_revenue-f-1120", "metric": "segment_revenue", "slot": "current", "anchor": "f-1120", "concept": "Revenues", "period_kind": "annual", "period_start": "2025-01-27", "period_end": "2026-01-25", "segment": "图形", "members": [["srt:ConsolidationItemsAxis", "us-gaap:OperatingSegmentsMember"], ["us-gaap:StatementBusinessSegmentsAxis", "nvda:GraphicsSegmentMember"]], "cik": "0001045810", "value": "22459000000", "display_original": "22,459", "currency": "USD", "unit": "USD", "scale": 6, "accounting_standard": "US_GAAP", "scope": "segment", "version": "0001045810-26-000021", "original_sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5", "source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm", "context_id": "c-194", "status": "verified", "verification": "ixbrl_and_reviewed_statement_checkpoint"}
+  ]
+}

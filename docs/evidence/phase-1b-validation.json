@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-27",
+  "timezone": "Asia/Shanghai",
+  "local_tests": {"total": 33, "passed": 33, "failed": 0},
+  "static_checks": ["python compileall", "node --check"],
+  "actual_sec_replay": {"unique_reports": 11, "reports_with_financial_facts": 10, "repeated_reports": 1},
+  "manual_replay": {"accession": "0000320193-26-000020", "facts": 12, "live_api_success": false},
+  "browser_css_viewports": {"desktop": [1440, 1000], "mobile": [390, 844], "mobile_document_width": 390},
+  "browser_checks": [
+    "Ambiguous English name search and explicit issuer selection",
+    "ArrowDown, Enter and focus on company selection",
+    "Microsoft Chinese-name search and unit switch",
+    "NVIDIA official fact anchor",
+    "Apple report switch; single-quarter income and cumulative cashflow",
+    "Unsupported company status",
+    "Report deep link",
+    "TSM 20-F TWD format, dark mode, 6-K document and exhibit link",
+    "Media licensing status"
+  ],
+  "screenshots": [
+    "phase1b-desktop-search.jpg",
+    "phase1b-desktop-nvda-financials.jpg",
+    "phase1b-desktop-apple-quarter.jpg",
+    "phase1b-mobile-tsm-light.jpg",
+    "phase1b-mobile-tsm-dark-financials.jpg",
+    "phase1b-mobile-tsm-6k.jpg"
+  ],
+  "screenshot_delivery": "local review package"
+}

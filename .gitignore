@@ -1,6 +1,9 @@
 .env
 .env.*
 !.env.example
+*.key
+*.pem
+work/
 __pycache__/
 .venv/
 local-results/

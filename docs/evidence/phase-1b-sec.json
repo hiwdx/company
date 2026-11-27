@@ -1,0 +1,510 @@
+{
+  "timezone": "Asia/Shanghai",
+  "observed_on": "2026-11-27",
+  "runs": [
+    {
+      "sample": "full",
+      "observed_on": "2026-11-27",
+      "transport": "SECClient urllib HTTPS",
+      "environment": "Darwin arm64 Python 3.9.6",
+      "minimum_interval_seconds": 1.1,
+      "stopped": null,
+      "attempts": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "at_utc": "2026-11-27T09:29:16.514728+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 164647,
+          "sha256": "7c22869dc335882f64cbdecced78135474ba31bdcc9e0ebfdffb1c0b0ba0d3b6"
+        }
+      ],
+      "apple_history": {
+        "status": "parse_failed",
+        "complete": false
+      },
+      "run_id": "first",
+      "note": "One directory request succeeded. The run stopped locally because the initial validator misclassified a proxy meeting date. The validator was corrected before the full run."
+    },
+    {
+      "sample": "full",
+      "observed_on": "2026-11-27",
+      "transport": "SECClient urllib HTTPS",
+      "environment": "Darwin arm64 Python 3.9.6",
+      "minimum_interval_seconds": 1.1,
+      "stopped": null,
+      "attempts": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "at_utc": "2026-11-27T09:30:36.369945+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 164647,
+          "sha256": "7c22869dc335882f64cbdecced78135474ba31bdcc9e0ebfdffb1c0b0ba0d3b6"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "at_utc": "2026-11-27T09:30:38.541195+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 3859564,
+          "sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+          "at_utc": "2026-11-27T09:30:41.754101+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 1650113,
+          "sha256": "e45f7066c377ccbc136b6d059b70bbbd4a739b0c0c41cdebc7ec3f3d822a6f8e"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm",
+          "at_utc": "2026-11-27T09:30:46.622650+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 1520318,
+          "sha256": "cd34fc1a61f0c007a2e130df30e16cc86b6ecbaba383e8dcf303f0b734f78071"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+          "at_utc": "2026-11-27T09:30:49.734090+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 1503890,
+          "sha256": "a9810f368b7bea14618f78a91f655deb6ab9c0961dd85ce5ca77800a8e7af63d"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm",
+          "at_utc": "2026-11-27T09:30:52.941247+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 1018320,
+          "sha256": "5330bc8dec51e76efa010842707a60608ea2188cf9f74e556c8c7c894b472f38"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000013/aapl-20260328.htm",
+          "at_utc": "2026-11-27T09:30:55.749524+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 999920,
+          "sha256": "f4110e59003493378210b9514b227c8100245823b78ebf19a5d1bd52b3889dda"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000006/aapl-20251227.htm",
+          "at_utc": "2026-11-27T09:30:59.059360+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 766083,
+          "sha256": "4c779634362749ed683668e54891d387fe5841f5b5aaf378579036ce0bf6759d"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000073/aapl-20250628.htm",
+          "at_utc": "2026-11-27T09:31:02.188744+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 888158,
+          "sha256": "91f396b96059bcdf862e71e1edc5c29ab960fc91c0dd57f4209005baaa30ae1d"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000789019.json",
+          "at_utc": "2026-11-27T09:31:05.282081+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 185316,
+          "sha256": "562abb0a5e834bd4c5510e4cc2e130c5d9cf8b1c076328804f7588c6a03f2963"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+          "at_utc": "2026-11-27T09:31:07.234389+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 4938072,
+          "sha256": "8c1903c041f5c27e86ed15f37debb1f41882b7904bba129ef9edc76478b1e8ea"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm",
+          "at_utc": "2026-11-27T09:31:10.701489+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 8585611,
+          "sha256": "4ee2a53a287fe7b4a5d63761b506b90b136b7b163ba329b07164e110a9977ca5"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001045810.json",
+          "at_utc": "2026-11-27T09:31:15.125666+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 160578,
+          "sha256": "7c07b0a81346ce337884f26d353cd752ad7db6b380e980f73f7c60297a51ad63"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json",
+          "at_utc": "2026-11-27T09:31:17.302942+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 4092966,
+          "sha256": "19ef503a5770f5660964b3c3aea6937579d9b359da344afe6a9adf59c63d26ff"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+          "at_utc": "2026-11-27T09:31:20.626494+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 1967926,
+          "sha256": "1c3ef66b6d09c6ed83a49d9447703c3954c195b754446856240978248e4928e5"
+        },
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001046179.json",
+          "at_utc": "2026-11-27T09:31:23.973264+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 162088,
+          "sha256": "b5bf2962e08c842225062ca8ca9b34aa5ee6bfcf8ac79fc38a28e2971a799b54"
+        }
+      ],
+      "apple_history": {
+        "status": "ok",
+        "complete": true,
+        "window": [
+          "2024-10-01",
+          "2026-11-27"
+        ],
+        "forms": [
+          "10-K",
+          "10-Q"
+        ],
+        "recent_from": "2015-10-07",
+        "observed_on": "2026-11-27",
+        "pending_pages": [],
+        "page_manifest": [
+          {
+            "name": "CIK0000320193-submissions-001.json",
+            "filingCount": 1278,
+            "filingFrom": "1994-01-26",
+            "filingTo": "2015-10-05"
+          }
+        ],
+        "reviewed_pages": [],
+        "matching_filings": [
+          {
+            "accessionNumber": "0000320193-26-000026",
+            "filingDate": "2026-11-03",
+            "reportDate": "2026-09-26",
+            "form": "10-K",
+            "primaryDocument": "aapl-20260926.htm"
+          },
+          {
+            "accessionNumber": "0000320193-26-000020",
+            "filingDate": "2026-07-31",
+            "reportDate": "2026-06-27",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20260627.htm"
+          },
+          {
+            "accessionNumber": "0000320193-26-000013",
+            "filingDate": "2026-05-01",
+            "reportDate": "2026-03-28",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20260328.htm"
+          },
+          {
+            "accessionNumber": "0000320193-26-000006",
+            "filingDate": "2026-01-30",
+            "reportDate": "2025-12-27",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20251227.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000079",
+            "filingDate": "2025-10-31",
+            "reportDate": "2025-09-27",
+            "form": "10-K",
+            "primaryDocument": "aapl-20250927.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000073",
+            "filingDate": "2025-08-01",
+            "reportDate": "2025-06-28",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20250628.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000057",
+            "filingDate": "2025-05-02",
+            "reportDate": "2025-03-29",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20250329.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000008",
+            "filingDate": "2025-01-31",
+            "reportDate": "2024-12-28",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20241228.htm"
+          },
+          {
+            "accessionNumber": "0000320193-24-000123",
+            "filingDate": "2024-11-01",
+            "reportDate": "2024-09-28",
+            "form": "10-K",
+            "primaryDocument": "aapl-20240928.htm"
+          }
+        ],
+        "indexed_rows": 1007
+      },
+      "run_id": "full",
+      "note": "US issuer originals and facts were acquired. TSM directory acquisition succeeded; the initial validator stopped on timezone-leading 6-K event dates. The separate TSM run used the corrected validator."
+    },
+    {
+      "sample": "full",
+      "observed_on": "2026-11-27",
+      "transport": "SECClient urllib HTTPS",
+      "environment": "Darwin arm64 Python 3.9.6",
+      "minimum_interval_seconds": 1.1,
+      "stopped": null,
+      "attempts": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0001046179.json",
+          "at_utc": "2026-11-27T09:32:04.842875+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 162088,
+          "sha256": "b5bf2962e08c842225062ca8ca9b34aa5ee6bfcf8ac79fc38a28e2971a799b54"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001046179.json",
+          "at_utc": "2026-11-27T09:32:06.985979+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 911248,
+          "sha256": "d3ebb91e3ad78c9482e238c4db36df60b295a3b49ca137774706f4f5e526044a"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1046179/000162828026025362/tsm-20251231.htm",
+          "at_utc": "2026-11-27T09:32:09.599959+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 10355926,
+          "sha256": "450e53a43fd8e97e638044f54cc29d4bbe034ec08040d52a938eb9fed524fb37"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/tsm-fsx20261113x6k.htm",
+          "at_utc": "2026-11-27T09:32:14.992191+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 17244,
+          "sha256": "f55a0ad8aef34eefb09bf0b337dc755efc4c918f2a58495b11ee6a200ef905dd"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000801/a2026q3consolidatedreport-.htm",
+          "at_utc": "2026-11-27T09:32:16.460196+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 4899116,
+          "sha256": "8b60d2a0e39d82f9d38f6073b302e9a292526730d1a3c6e9a0b356dd74ba096a"
+        }
+      ],
+      "apple_history": null,
+      "run_id": "tsm"
+    },
+    {
+      "sample": "repeat",
+      "observed_on": "2026-11-27",
+      "transport": "SECClient urllib HTTPS",
+      "environment": "Darwin arm64 Python 3.9.6",
+      "minimum_interval_seconds": 1.1,
+      "stopped": null,
+      "attempts": [
+        {
+          "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+          "at_utc": "2026-11-27T09:34:15.774503+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 164647,
+          "sha256": "7c22869dc335882f64cbdecced78135474ba31bdcc9e0ebfdffb1c0b0ba0d3b6"
+        },
+        {
+          "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+          "at_utc": "2026-11-27T09:34:18.745348+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "application/json",
+          "bytes": 3859564,
+          "sha256": "f085735b4d08fb116ade18d24247ffabe11df8eb52eae6556b165831f15ef1ad"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019326000026/aapl-20260926.htm",
+          "at_utc": "2026-11-27T09:34:22.706079+00:00",
+          "status": "ok",
+          "http_status": 200,
+          "mime": "text/html",
+          "bytes": 1650113,
+          "sha256": "e45f7066c377ccbc136b6d059b70bbbd4a739b0c0c41cdebc7ec3f3d822a6f8e"
+        }
+      ],
+      "apple_history": {
+        "status": "ok",
+        "complete": true,
+        "window": [
+          "2024-10-01",
+          "2026-11-27"
+        ],
+        "forms": [
+          "10-K",
+          "10-Q"
+        ],
+        "recent_from": "2015-10-07",
+        "observed_on": "2026-11-27",
+        "pending_pages": [],
+        "page_manifest": [
+          {
+            "name": "CIK0000320193-submissions-001.json",
+            "filingCount": 1278,
+            "filingFrom": "1994-01-26",
+            "filingTo": "2015-10-05"
+          }
+        ],
+        "reviewed_pages": [],
+        "matching_filings": [
+          {
+            "accessionNumber": "0000320193-26-000026",
+            "filingDate": "2026-11-03",
+            "reportDate": "2026-09-26",
+            "form": "10-K",
+            "primaryDocument": "aapl-20260926.htm"
+          },
+          {
+            "accessionNumber": "0000320193-26-000020",
+            "filingDate": "2026-07-31",
+            "reportDate": "2026-06-27",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20260627.htm"
+          },
+          {
+            "accessionNumber": "0000320193-26-000013",
+            "filingDate": "2026-05-01",
+            "reportDate": "2026-03-28",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20260328.htm"
+          },
+          {
+            "accessionNumber": "0000320193-26-000006",
+            "filingDate": "2026-01-30",
+            "reportDate": "2025-12-27",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20251227.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000079",
+            "filingDate": "2025-10-31",
+            "reportDate": "2025-09-27",
+            "form": "10-K",
+            "primaryDocument": "aapl-20250927.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000073",
+            "filingDate": "2025-08-01",
+            "reportDate": "2025-06-28",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20250628.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000057",
+            "filingDate": "2025-05-02",
+            "reportDate": "2025-03-29",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20250329.htm"
+          },
+          {
+            "accessionNumber": "0000320193-25-000008",
+            "filingDate": "2025-01-31",
+            "reportDate": "2024-12-28",
+            "form": "10-Q",
+            "primaryDocument": "aapl-20241228.htm"
+          },
+          {
+            "accessionNumber": "0000320193-24-000123",
+            "filingDate": "2024-11-01",
+            "reportDate": "2024-09-28",
+            "form": "10-K",
+            "primaryDocument": "aapl-20240928.htm"
+          }
+        ],
+        "indexed_rows": 1007
+      },
+      "run_id": "repeat"
+    }
+  ],
+  "identity": [
+    {
+      "cik": "0000320193",
+      "name": "Apple Inc.",
+      "tickers": [
+        "AAPL"
+      ],
+      "exchanges": [
+        "Nasdaq"
+      ],
+      "fiscalYearEnd": "0925"
+    },
+    {
+      "cik": "0000789019",
+      "name": "MICROSOFT CORP",
+      "tickers": [
+        "MSFT"
+      ],
+      "exchanges": [
+        "Nasdaq"
+      ],
+      "fiscalYearEnd": "0630"
+    },
+    {
+      "cik": "0001045810",
+      "name": "NVIDIA CORP",
+      "tickers": [
+        "NVDA"
+      ],
+      "exchanges": [
+        "Nasdaq"
+      ],
+      "fiscalYearEnd": "0131"
+    },
+    {
+      "cik": "0001046179",
+      "name": "TAIWAN SEMICONDUCTOR MANUFACTURING CO LTD",
+      "tickers": [
+        "TSM",
+        "TSMWF"
+      ],
+      "exchanges": [
+        "NYSE",
+        "OTC"
+      ],
+      "fiscalYearEnd": "1231"
+    }
+  ]
+}
