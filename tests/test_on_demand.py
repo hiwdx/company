@@ -122,6 +122,48 @@ class DiscoveryTests(unittest.TestCase):
         self.assertEqual(len(query_directory(catalog, 'Unknown Placeholder')), 2)
         self.assertEqual(query_directory(catalog, 'NONEXISTENT'), [])
 
+    def test_official_search_preserves_local_reviewed_report_access(self):
+        with tempfile.TemporaryDirectory() as root:
+            reports = Path(__file__).resolve().parents[1] / 'data/reports'
+            accession = '0001046179-26-000801'
+            tsm = json.loads((reports / (accession + '.json')).read_bytes())
+            cik = tsm['issuer']['cik']
+            store = Store(Path(root) / 'reader.sqlite')
+            store.put(tsm)
+            research = Research(Path(root) / 'sec.sqlite', clock=lambda: datetime.fromisoformat(STAMP))
+            rows = DIRECTORY['data'] + [[int(cik), 'TAIWAN SEMICONDUCTOR MANUFACTURING CO LTD', 'TSM', 'NYSE']]
+            raw = json.dumps({**DIRECTORY, 'data': rows}).encode()
+            research.cache.remember(raw, {'url': DIRECTORY_URL, 'observed_at': STAMP, 'sha256': sha256(raw).hexdigest()})
+            server = ThreadingHTTPServer(('127.0.0.1', 0), handler_for(store, research))
+            thread = Thread(target=server.serve_forever, daemon=True)
+            thread.start()
+
+            def get(path):
+                con = HTTPConnection('127.0.0.1', server.server_port, timeout=3)
+                try:
+                    con.request('GET', path)
+                    response = con.getresponse()
+                    self.assertEqual(response.status, 200)
+                    return json.loads(response.read())
+                finally:
+                    con.close()
+
+            try:
+                matches = get('/api/search?q=TSM')
+                self.assertEqual(matches['scope'], 'sec_directory')
+                self.assertTrue(matches['candidates'][0]['has_reviewed_snapshot'])
+                unknown = get('/api/search?q=ZZQQ')['candidates'][0]
+                self.assertFalse(unknown['has_reviewed_snapshot'])
+                restored = get(f'/api/reader?cik={cik}&accession={accession}')
+                self.assertEqual(restored['document']['form'], '6-K')
+                self.assertEqual(restored['rows'], [])
+                self.assertEqual(research.source.attempts, [])
+            finally:
+                server.shutdown()
+                server.server_close()
+                thread.join()
+                research.close()
+
     def test_archive_disagreement_does_not_poison_independent_event_window(self):
         page_name = 'CIK0000001001-submissions-001.json'
         page = {'name': page_name, 'filingFrom': '2025-07-01', 'filingTo': '2025-08-02', 'filingCount': 1}

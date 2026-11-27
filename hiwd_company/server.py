@@ -115,6 +115,8 @@ def handler_for(store, research=None):
                 official = research.search(query)
                 seen = {row['cik'] for row in official['candidates']}
                 official['candidates'] += [row for row in local if row['cik'] not in seen]
+                for candidate in official['candidates']:
+                    candidate['has_reviewed_snapshot'] = candidate['cik'] in supported and bool(store.reports(candidate['cik']))
                 if official['candidates']:
                     official['status'] = 'ok'
                 return official
@@ -158,13 +160,14 @@ def handler_for(store, research=None):
                 return self.respond(400, {'status': 'invalid_query'})
             try:
                 data = research.store.read(cik, accession, version) if research and cik else None
-                if data and data.get('schema_version') == 3:
+                needs_review = data and data.get('schema_version') == 3
+                if needs_review:
                     data = None
-                    if accession:
-                        return self.respond(409, {'status': 'needs_semantic_review'})
                 if data is None:
                     data = store.read(cik, accession, version)
                 if data is None:
+                    if needs_review and accession:
+                        return self.respond(409, {'status': 'needs_semantic_review'})
                     if research and cik and research.cache.report(cik):
                         return self.respond(409, {'status': 'report_not_verified'})
                     return self.respond(404, {'status': 'unsupported' if cik and cik not in supported else 'not_found'})
