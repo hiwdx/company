@@ -1,0 +1,12 @@
+SYNTHETIC SCHEMA FIXTURE — NOT LIVE DATA; fake ticker and period.
+[Batch] 状态: success | 总数: 1 | 成功: 1 | 失败: 0
+
+| code | EndDate | DisclosureCurrency | Sales_Q |
+| --- | --- | --- | --- |
+| usDEMO | 2000-01-01 | TWD | 123.45 |
+
+| code | name | introduction |
+| --- | --- | --- |
+| hk00000 | DEMO | first line
+second line |
+| hk00001 | EXAMPLE | next line |
